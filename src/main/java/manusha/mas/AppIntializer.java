@@ -1,8 +1,7 @@
-package manusha.busticket;
+package manusha.mas;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -22,7 +21,8 @@ public class AppIntializer extends Application {
 
         Scene scene = new Scene((javafx.scene.Parent) load);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Bus Ticket Reservation System");
+        primaryStage.setResizable(false);
+        primaryStage.setTitle("MAS Initimates");
         primaryStage.show();
 
     }

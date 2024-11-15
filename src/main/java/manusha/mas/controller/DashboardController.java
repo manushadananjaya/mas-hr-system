@@ -1,4 +1,4 @@
-package manusha.busticket.controller;
+package manusha.mas.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,9 +22,9 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 
 import javafx.event.ActionEvent;
-import manusha.busticket.model.Bus;
-import manusha.busticket.model.Customer;
-import manusha.busticket.util.DatabaseConnection;
+import manusha.mas.model.Bus;
+import manusha.mas.model.Customer;
+import manusha.mas.util.DatabaseConnection;
 
 
 

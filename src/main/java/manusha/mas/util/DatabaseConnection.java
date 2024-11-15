@@ -1,4 +1,4 @@
-package manusha.busticket.util;
+package manusha.mas.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

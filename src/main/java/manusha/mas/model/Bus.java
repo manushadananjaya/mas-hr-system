@@ -1,4 +1,4 @@
-package manusha.busticket.model;
+package manusha.mas.model;
 
 import java.sql.Date;
 
