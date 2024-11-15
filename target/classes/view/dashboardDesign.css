@@ -1,0 +1,131 @@
+.top-form {
+    -fx-background-color: #fff;
+    -fx-border-color: #fff;
+    -fx-border-width: .4px .4px .2px .4px;
+}
+
+.semi-top-form {
+    -fx-background-color: #efefef;
+    -fx-border-color: #000;
+    -fx-border-width: .0px .4px .8px .4px;
+}
+
+.nav-form {
+    -fx-background-color: linear-gradient(to bottom, #702963, 	#722F37);
+}
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-font-family: "Arial";
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: #fff;
+}
+
+.nav-btn:hover {
+    -fx-background-color: #fff;
+    -fx-text-fill: #000;
+}
+
+.close{
+    -fx-background-color: #FF0000;
+    -fx-text-fill: #fff;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-font-family: "Arial";
+    -fx-alignment: CENTER_RIGHT;
+    -fx-border-color: #fff;
+}
+
+.close:hover {
+    -fx-background-color: #800020;
+    -fx-text-fill: #fff;
+}
+
+.nav-btn:pressed {
+    -fx-background-color: #fff;
+    -fx-text-fill: #000;
+}
+
+.minimize{
+    -fx-background-color: transparent;
+    -fx-text-fill: #000;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-font-family: "Arial";
+    -fx-alignment: CENTER_RIGHT;
+    -fx-border-color: #fff;
+}
+
+.minimize:hover {
+    -fx-background-color: #fff;
+    -fx-text-fill: 	#770737;
+}
+
+.minimize:pressed {
+    -fx-background-color: #fff;
+    -fx-text-fill: #000;
+}
+
+
+
+.logout-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-font-family: "Arial";
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-color: #fff;
+}
+
+.logout-btn:hover {
+    -fx-background-color: #fff;
+    -fx-text-fill: #000;
+}
+
+.white-bg {
+    -fx-background-color: #fff;
+    -fx-background-radius: 5px;
+}
+
+.shadow{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0, 0, 0);
+}
+
+.card{
+    -fx-background-color: linear-gradient(to bottom, #800000, #00008B);
+    -fx-background-radius: 5px;
+}
+
+.card2{
+    -fx-background-color: linear-gradient(to bottom, #000080, #4667a0);
+    -fx-background-radius: 5px;
+}
+
+.card3{
+    -fx-background-color: linear-gradient(to bottom, 	#008080, #4667a0);
+        -fx-background-radius: 5px;
+}
+
+.info-card{
+    -fx-background-color: linear-gradient(to bottom, 	#811331, #3c8256);
+    -fx-background-radius: 5px;
+}
+
+.max-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #023020;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-font-family: "Arial";
+    -fx-alignment: CENTER_RIGHT;
+    -fx-border-color: #fff;
+}
+
+.max-btn:hover {
+    -fx-background-color: #008000;
+    -fx-text-fill: #fff;
+}
