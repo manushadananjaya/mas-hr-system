@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manusha.mas.controller.IEDashboardController">
+    <children>
+        <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #1a237e; -fx-padding: 10px;">
+                    <children>
+                        <Label style="-fx-font-size: 24px; -fx-text-fill: white;" text="IE Informations">
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Region prefHeight="29.0" prefWidth="780.0" HBox.hgrow="ALWAYS" />
+                        <Label style="-fx-font-size: 24px; -fx-text-fill: red;" text="MAS Intimates">
+                            <HBox.margin>
+                                <Insets right="20.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+            </top>
+            <left>
+                <VBox prefWidth="250.0" style="-fx-background-color: #1a237e; -fx-padding: 20px;">
+                    <children>
+                        <VBox prefHeight="464.0" prefWidth="211.0" spacing="10" VBox.vgrow="ALWAYS">
+                            <children>
+                                <Button fx:id="requestingFormBtn" maxWidth="Infinity" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Requesting Form" />
+                                <Button fx:id="requestedDetailsBtn" maxWidth="Infinity" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Requested Details" />
+                                <Button fx:id="trainingPerfoBtn" maxWidth="Infinity" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Training Performance" />
+                            </children>
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                        </VBox>
+                        <Button fx:id="logOutBtn" maxWidth="Infinity" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Log Out">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </left>
+            <center>
+                <StackPane>
+                    <children>
+                        <!-- Existing Main Content Pane -->
+                        <AnchorPane fx:id="mainContentPane">
+                            <children>
+                                <VBox spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <children>
+                                        <GridPane hgap="10" vgap="10">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Label text="IEEPF" />
+                                                <TextField fx:id="ieepfField" GridPane.columnIndex="1" />
+                                                <Label text="IEName" GridPane.rowIndex="1" />
+                                                <TextField fx:id="ieNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="IESection" GridPane.rowIndex="2" />
+                                                <TextField fx:id="ieSectionField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            </children>
+                                        </GridPane>
+                                        <TableView fx:id="ieTable" VBox.vgrow="ALWAYS">
+                                            <columns>
+                                                <TableColumn text="Name" />
+                                                <TableColumn text="Section" />
+                                                <TableColumn text="Module" />
+                                                <TableColumn text="Operation" />
+                                                <TableColumn text="Date" />
+                                                <TableColumn text="Count" />
+                                            </columns>
+                                        </TableView>
+                                        <HBox spacing="10">
+                                            <children>
+                                                <Button style="-fx-min-width: 100px;" text="Save" />
+                                                <Button style="-fx-min-width: 100px;" text="Delete" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+
+                        <!-- Requested Details Pane -->
+                        <AnchorPane fx:id="requestedDetailsPane" visible="false" styleClass="content-pane">
+                            <children>
+                                <Label text="Shift A" styleClass="shift-label" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" />
+
+                                <TableView fx:id="shiftTable" styleClass="custom-table" AnchorPane.topAnchor="60.0"
+                                           AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.bottomAnchor="20.0">
+                                    <columns>
+                                        <TableColumn fx:id="nameColumn" text="Name" prefWidth="150.0" />
+                                        <TableColumn fx:id="sectionColumn" text="Section" prefWidth="150.0" />
+                                        <TableColumn fx:id="moduleColumn" text="ModuleNo." prefWidth="150.0" />
+                                        <TableColumn fx:id="operationColumn" text="Operation" prefWidth="150.0" />
+                                        <TableColumn fx:id="dateColumn" text="Req.Date" prefWidth="150.0" />
+                                        <TableColumn fx:id="countColumn" text="Count" prefWidth="100.0" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+
+                        <!-- Training Performance Pane -->
+                        <AnchorPane fx:id="trainingPerformancePane" visible="false" styleClass="content-pane">
+                            <children>
+                                <!-- Search Section -->
+                                <HBox alignment="CENTER_LEFT" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                                    <TextField fx:id="searchField" promptText="Search here" styleClass="search-field" prefHeight="35.0" prefWidth="300.0" />
+                                </HBox>
+
+                                <!-- Form and Skill Matrix Section -->
+                                <GridPane hgap="20" vgap="10" AnchorPane.topAnchor="80.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="50" />
+                                        <ColumnConstraints percentWidth="50" />
+                                    </columnConstraints>
+
+                                    <!-- Left Side - Form Fields -->
+                                    <VBox spacing="10" styleClass="form-container" GridPane.columnIndex="0">
+                                        <GridPane vgap="10" hgap="10">
+                                            <Label text="Name" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                                            <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                                            <Label text="Designation" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                                            <TextField fx:id="designationField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                                            <Label text="Gender" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                                            <TextField fx:id="genderField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+                                            <Label text="Training S/D" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                                            <TextField fx:id="trainingField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+                                        </GridPane>
+                                    </VBox>
+
+                                    <!-- Right Side - Skill Matrix -->
+                                    <VBox spacing="10" styleClass="skill-matrix" GridPane.columnIndex="1">
+                                        <Label text="Skill Matrix" styleClass="section-header" />
+                                        <GridPane vgap="5" hgap="10">
+                                            <Label text="Operation 01" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                                            <ProgressBar progress="0.65" prefWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+                                            <Label text="65%" GridPane.rowIndex="0" GridPane.columnIndex="2" />
+
+                                            <Label text="Operation 02" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                                            <ProgressBar progress="0.76" prefWidth="200" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                                            <Label text="76%" GridPane.rowIndex="1" GridPane.columnIndex="2" />
+
+                                            <!-- Add more operations similarly -->
+                                        </GridPane>
+                                    </VBox>
+                                </GridPane>
+
+                                <!-- Charts Section -->
+                                <HBox spacing="20" AnchorPane.topAnchor="400.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0"
+                                      AnchorPane.bottomAnchor="20.0">
+                                    <!-- Performance Tracking Chart -->
+                                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                                        <Label text="Performance Tracking" styleClass="section-header" />
+                                        <BarChart fx:id="performanceChart">
+                                            <xAxis>
+                                                <CategoryAxis label="Operations" />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis label="Time" />
+                                            </yAxis>
+                                        </BarChart>
+                                    </VBox>
+
+                                    <!-- Daily Tracking Charts -->
+                                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                                        <Label text="Daily Tracking" styleClass="section-header" />
+                                        <GridPane vgap="10">
+                                            <BarChart fx:id="performanceDailyChart" title="Performance"
+                                                      GridPane.rowIndex="0" prefHeight="200">
+                                                <xAxis>
+                                                    <CategoryAxis />
+                                                </xAxis>
+                                                <yAxis>
+                                                    <NumberAxis />
+                                                </yAxis>
+                                            </BarChart>
+
+                                            <BarChart fx:id="fttChart" title="FTT"
+                                                      GridPane.rowIndex="1" prefHeight="200">
+                                                <xAxis>
+                                                    <CategoryAxis />
+                                                </xAxis>
+                                                <yAxis>
+                                                    <NumberAxis />
+                                                </yAxis>
+                                            </BarChart>
+                                        </GridPane>
+                                    </VBox>
+                                </HBox>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </StackPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
