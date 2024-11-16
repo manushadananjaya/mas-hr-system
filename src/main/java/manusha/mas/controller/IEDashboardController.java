@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import manusha.mas.util.DatabaseConnection;
 import manusha.mas.model.RequestDetails;
@@ -17,13 +18,16 @@ import java.time.LocalDate;
 public class IEDashboardController {
 
     public Button editBtn;
-    public TableView shiftTable;
-    public TableColumn nameColumn;
-    public TableColumn sectionColumn;
-    public TableColumn moduleColumn;
-    public TableColumn operationColumn;
-    public TableColumn dateColumn;
-    public TableColumn countColumn;
+
+    public TableView<RequestDetails> shiftTable;
+    public TableColumn<RequestDetails, String> nameColumn;
+    public TableColumn<RequestDetails, String> sectionColumn;
+    public TableColumn<RequestDetails, String> moduleColumn;
+    public TableColumn<RequestDetails, String> operationColumn;
+    public TableColumn<RequestDetails, String> dateColumn;
+    public TableColumn<RequestDetails, Integer> countColumn;
+
+
     @FXML
     private AnchorPane mainContentPane, requestedDetailsPane, trainingPerformancePane;
 
@@ -63,7 +67,9 @@ public class IEDashboardController {
 
         // Initialize table columns
         initializeTableColumns();
-        
+
+        initializeShiftTableColumns();
+
 
         // Load current data into the table
         loadCurrentRequestedDetails();
@@ -76,12 +82,14 @@ public class IEDashboardController {
 
     @FXML
     private void handleRequestingFormBtn() {
+        loadCurrentRequestedDetails();
         showPane(mainContentPane);
         highlightButton(requestingFormBtn);
     }
 
     @FXML
     private void handleRequestedDetailsBtn() {
+        loadShiftDetails();
         showPane(requestedDetailsPane);
         highlightButton(requestedDetailsBtn);
     }
@@ -116,6 +124,42 @@ public class IEDashboardController {
         ReqOperationColumn.setCellValueFactory(data -> data.getValue().operationProperty());
         reqDateColumn.setCellValueFactory(data -> data.getValue().reqDateProperty().asString());
         reqCountColumn.setCellValueFactory(data -> data.getValue().countProperty().asObject());
+    }
+
+    private void initializeShiftTableColumns() {
+        nameColumn.setCellValueFactory(data -> data.getValue().ieNameProperty());
+        sectionColumn.setCellValueFactory(data -> data.getValue().ieSectionProperty());
+        moduleColumn.setCellValueFactory(data -> data.getValue().moduleNoProperty());
+        operationColumn.setCellValueFactory(data -> data.getValue().operationProperty());
+        dateColumn.setCellValueFactory(data -> data.getValue().reqDateProperty().asString());
+        countColumn.setCellValueFactory(data -> data.getValue().countProperty().asObject());
+
+    }
+
+    private void loadShiftDetails() {
+        requestDetailsList.clear();
+        String query = "SELECT * FROM requested_details";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                requestDetailsList.add(new RequestDetails(
+                        rs.getInt("id"),
+                        rs.getString("ieepf"),
+                        rs.getString("ie_name"),
+                        rs.getString("ie_shift"),
+                        rs.getString("ie_section"),
+                        rs.getString("module_no"),
+                        rs.getString("customer"),
+                        rs.getString("operation"),
+                        rs.getDate("req_date").toLocalDate(),
+                        rs.getInt("req_count")
+                ));
+            }
+        } catch (SQLException e) {
+            showErrorDialog("Error Loading Data", "Unable to load data from the database.\n" + e.getMessage());
+        }
+        shiftTable.setItems(requestDetailsList);
     }
 
 
