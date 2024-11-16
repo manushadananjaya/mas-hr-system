@@ -5,6 +5,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
@@ -65,54 +66,92 @@
                 <StackPane>
                     <children>
                         <!-- Existing Main Content Pane -->
-                        <AnchorPane fx:id="mainContentPane">
+                        <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
                             <children>
-                                <VBox spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-                                    <children>
-                                        <GridPane hgap="10" vgap="10">
-                                            <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
+                                <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <center>
+                                        <StackPane>
                                             <children>
-                                                <Label text="IEEPF" />
-                                                <TextField fx:id="ieepfField" GridPane.columnIndex="1" />
-                                                <Label text="IEName" GridPane.rowIndex="1" />
-                                                <TextField fx:id="ieNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="IESection" GridPane.rowIndex="2" />
-                                                <TextField fx:id="ieSectionField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <AnchorPane fx:id="mainContentPane">
+                                                    <children>
+                                                        <VBox spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                                            <children>
+                                                                <!-- Updated GridPane for Form Fields -->
+                                                                <GridPane hgap="10" vgap="10">
+                                                                    <columnConstraints>
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+                                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                                                                    </columnConstraints>
+                                                                    <rowConstraints>
+                                                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints />
+                                                      <RowConstraints />
+                                                      <RowConstraints />
+                                                      <RowConstraints />
+                                                      <RowConstraints />
+                                                      <RowConstraints />
+                                                      <RowConstraints />
+                                                      <RowConstraints />
+                                                                    </rowConstraints>
+                                                                    <children>
+                                                                        <Label text="IEEPF" />
+                                                                        <TextField fx:id="ieepfField" GridPane.columnIndex="1" />
+                                                                        <Label text="IEName" GridPane.rowIndex="1" />
+                                                                        <TextField fx:id="ieNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                        <Label text="IEShift" GridPane.rowIndex="2" />
+                                                                        <TextField fx:id="ieShiftField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                        <Label text="IESection" GridPane.rowIndex="3" />
+                                                                        <TextField fx:id="ieSectionField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                        <Label text="ModuleNo" GridPane.rowIndex="4" />
+                                                                        <TextField fx:id="moduleNoField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                        <Label text="Customer" GridPane.rowIndex="5" />
+                                                                        <TextField fx:id="customerField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                                        <Label text="Required Operation" GridPane.rowIndex="6" />
+                                                                        <TextField fx:id="requiredOperationField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                                        <Label text="Required Date" GridPane.rowIndex="7" />
+                                                                        <DatePicker fx:id="requiredDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                                        <Label text="Required Count" GridPane.rowIndex="8" />
+                                                                        <TextField fx:id="requiredCountField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                                                    </children>
+                                                                </GridPane>
+
+                                                                <!-- Updated Table -->
+                                                                <TableView fx:id="ieTable" VBox.vgrow="ALWAYS">
+                                                                    <columns>
+                                                                        <TableColumn fx:id="idColumn" text="id" />
+                                                                        <TableColumn fx:id="ieepfColumn" text="IEEPF" />
+                                                                        <TableColumn fx:id="ieNameColumn" prefWidth="98.0" text="IEName" />
+                                                                        <TableColumn fx:id="ieShiftColumn" prefWidth="93.0" text="IEShift" />
+                                                                        <TableColumn fx:id="ieSectionColumn" prefWidth="95.0" text="IESection" />
+                                                                        <TableColumn fx:id="moduleNoColumn" prefWidth="122.0" text="ModuleNo" />
+                                                                        <TableColumn fx:id="ReqOperationColumn" prefWidth="202.0" text="Operation" />
+                                                                        <TableColumn fx:id="reqDateColumn" prefWidth="126.0" text="Required Date" />
+                                                                        <TableColumn fx:id="reqCountColumn" prefWidth="93.0" text="Required Count" />
+                                                                    </columns>
+                                                                </TableView>
+
+                                                                <!-- Save and Delete Buttons -->
+                                                                <HBox spacing="10">
+                                                                    <children>
+                                                                        <Button fx:id="saveBtn" style="-fx-min-width: 100px;" text="Save" />
+                                                                        <Button fx:id="editBtn" style="-fx-min-width: 100px;" text="Edit" />
+                                                                        <Button fx:id="deleteBtn" style="-fx-min-width: 100px;" text="Delete" />
+                                                                    </children>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </AnchorPane>
                                             </children>
-                                        </GridPane>
-                                        <TableView fx:id="ieTable" VBox.vgrow="ALWAYS">
-                                            <columns>
-                                                <TableColumn text="Name" />
-                                                <TableColumn text="Section" />
-                                                <TableColumn text="Module" />
-                                                <TableColumn text="Operation" />
-                                                <TableColumn text="Date" />
-                                                <TableColumn text="Count" />
-                                            </columns>
-                                        </TableView>
-                                        <HBox spacing="10">
-                                            <children>
-                                                <Button style="-fx-min-width: 100px;" text="Save" />
-                                                <Button style="-fx-min-width: 100px;" text="Delete" />
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </VBox>
+                                        </StackPane>
+                                    </center>
+                                </BorderPane>
                             </children>
                         </AnchorPane>
 
                         <!-- Requested Details Pane -->
                         <AnchorPane fx:id="requestedDetailsPane" styleClass="content-pane" visible="false">
                             <children>
-                                <Label styleClass="shift-label" text="Shift A" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
 
                                 <TableView fx:id="shiftTable" styleClass="custom-table" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
                                     <columns>
