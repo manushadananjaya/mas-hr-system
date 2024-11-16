@@ -10,9 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import manusha.mas.util.DatabaseConnection;
 
 import java.io.IOException;
@@ -89,6 +87,7 @@ public class MainFormController {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
 
+                // Setting up dragging functionality (optional)
                 root.setOnMousePressed(e -> {
                     x = e.getSceneX();
                     y = e.getSceneY();
@@ -99,7 +98,7 @@ public class MainFormController {
                     stage.setY(e.getScreenY() - y);
                 });
 
-                stage.initStyle(StageStyle.TRANSPARENT);
+
                 stage.setScene(scene);
                 stage.setTitle(selectedRole + " Dashboard");
                 stage.show();
