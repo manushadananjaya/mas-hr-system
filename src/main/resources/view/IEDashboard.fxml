@@ -66,7 +66,7 @@
                 <StackPane>
                     <children>
                         <!-- Existing Main Content Pane -->
-                        <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+                        <AnchorPane prefHeight="800.0" prefWidth="1200.0" visible="false" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
                             <children>
                                 <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <center>
@@ -167,7 +167,7 @@
                         </AnchorPane>
 
                         <!-- Training Performance Pane -->
-                        <AnchorPane fx:id="trainingPerformancePane" styleClass="content-pane" visible="false">
+                        <AnchorPane fx:id="trainingPerformancePane" styleClass="content-pane">
                             <children>
                                 <!-- Search Section -->
                                 <HBox alignment="CENTER_LEFT" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
