@@ -219,6 +219,24 @@
                                             <Label text="Operation 02" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                                             <ProgressBar prefWidth="200" progress="0.76" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                             <Label text="76%" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+
+                                            <Label text="Operation 03" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                            <ProgressBar prefWidth="200" progress="0.85" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            <Label text="85%" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+
+                                            <Label text="Operation 04" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                            <ProgressBar prefWidth="200" progress="0.95" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                            <Label text="95%" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+
+                                            <Label text="Operation 05" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                                            <ProgressBar prefWidth="200" progress="0.55" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                            <Label text="55%" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+
+                                            <Label text="Operation 06" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                                            <ProgressBar prefWidth="200" progress="0.45" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                            <Label text="45%" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+
+
                                  <columnConstraints>
                                     <ColumnConstraints />
                                     <ColumnConstraints />
