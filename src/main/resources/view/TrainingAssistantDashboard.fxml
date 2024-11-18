@@ -49,7 +49,7 @@
                     <children>
                         <Button fx:id="individualPerformanceBtn" maxWidth="Infinity" onAction="#individualPerformanceBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Individual Performance" />
                         <Button fx:id="performanceFormBtn" maxWidth="Infinity" onAction="#performanceFormBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Performance Form" />
-                        <Button fx:id="attendanceBtn" maxWidth="Infinity" onAction="#attendanceBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Attendance" />
+                        <Button fx:id="attendanceBtn" maxWidth="Infinity" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Attendance" />
                         <VBox VBox.vgrow="ALWAYS" />
                         <Button fx:id="logOutBtn" maxWidth="Infinity" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Log Out" />
                     </children>
@@ -61,7 +61,7 @@
                 <StackPane>
                     <children>
                         <!-- Individual Performance Section -->
-                        <AnchorPane fx:id="trainingAssistantPane" visible="true">
+                        <AnchorPane fx:id="trainingAssistantPane" visible="false">
                             <children>
                                 <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                     <Label text="Training Assistant" />
@@ -190,11 +190,12 @@
 
                         <!-- Performance Form Section -->
                         <!-- Training Performance Pane -->
-                        <AnchorPane fx:id="trainingPerformancePane" styleClass="content-pane" visible="false">
+                        <AnchorPane fx:id="trainingPerformancePane" styleClass="content-pane">
                             <children>
                                 <!-- Search Section -->
                                 <HBox alignment="CENTER_LEFT" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                     <TextField fx:id="searchField" prefHeight="35.0" prefWidth="300.0" promptText="Search here" styleClass="search-field" />
+                           <Button fx:id="SearchBtn" mnemonicParsing="false" onAction="#handleSearchEPF" prefHeight="34.0" prefWidth="76.0" text="Search" />
                                 </HBox>
 
                                 <!-- Form and Skill Matrix Section -->
@@ -235,30 +236,37 @@
                                     <VBox spacing="10" styleClass="skill-matrix" GridPane.columnIndex="1">
                                         <Label styleClass="section-header" text="Skill Matrix" />
                                         <GridPane hgap="10" vgap="5">
+
+
                                             <Label text="Operation 01" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                            <ProgressBar prefWidth="200" progress="0.65" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                                            <Label text="65%" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                                            <ProgressBar fx:id="operation1Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                            <Label fx:id="operation1Label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+
+
 
                                             <Label text="Operation 02" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                            <ProgressBar prefWidth="200" progress="0.76" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                            <Label text="76%" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                            <ProgressBar fx:id="operation2Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                            <Label fx:id="operation2Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+
 
                                             <Label text="Operation 03" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                            <ProgressBar prefWidth="200" progress="0.85" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                            <Label text="85%" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                            <ProgressBar fx:id="operation3Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            <Label fx:id="operation3Label"  GridPane.columnIndex="2" GridPane.rowIndex="2" />
+
 
                                             <Label text="Operation 04" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                                            <ProgressBar prefWidth="200" progress="0.95" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                            <Label text="95%" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                            <ProgressBar fx:id="operation4Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                            <Label fx:id="operation4Label"  GridPane.columnIndex="2" GridPane.rowIndex="3" />
+
 
                                             <Label text="Operation 05" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                                            <ProgressBar prefWidth="200" progress="0.55" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                            <Label text="55%" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                            <ProgressBar fx:id="operation5Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                            <Label fx:id="operation5Label"  GridPane.columnIndex="2" GridPane.rowIndex="4" />
+
 
                                             <Label text="Operation 06" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                                            <ProgressBar prefWidth="200" progress="0.45" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                            <Label text="45%" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-
+                                            <ProgressBar fx:id="operation6Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                            <Label fx:id="operation6Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
 
                                             <columnConstraints>
                                                 <ColumnConstraints />
@@ -310,7 +318,7 @@
                                                 </yAxis>
                                             </BarChart>
 
-                                            <BarChart fx:id="fttChart" prefHeight="200" title="FTT" GridPane.rowIndex="1">
+                                            <BarChart fx:id="qualityChart" prefHeight="200" title="Quality" GridPane.rowIndex="1">
                                                 <xAxis>
                                                     <CategoryAxis />
                                                 </xAxis>
