@@ -1,11 +1,14 @@
 package manusha.mas.controller;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import manusha.mas.util.DatabaseConnection;
 import javafx.scene.input.MouseEvent;
@@ -13,6 +16,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -29,10 +34,10 @@ public class TrainingAssistantController {
     private AnchorPane attendancePane;
 
     @FXML
-    private TableColumn<?, ?> attendancePercentColumn;
+    private TableColumn<EmployeeAttendance, Double> attendancePercentColumn;
 
     @FXML
-    private TableView<?> attendanceTable;
+    private TableView<EmployeeAttendance> attendanceTable;
 
     @FXML
     private RadioButton attendanceYes;
@@ -44,7 +49,7 @@ public class TrainingAssistantController {
     private TextField designationField;
 
     @FXML
-    private TableColumn<?, ?> epfColumn;
+    private TableColumn<EmployeeAttendance, String> epfColumn;
 
     @FXML
     private TextField epfField;
@@ -62,10 +67,10 @@ public class TrainingAssistantController {
     private Button logOutBtn;
 
     @FXML
-    private ComboBox<?> monthComboBox;
+    private ComboBox<String> monthComboBox;
 
     @FXML
-    private TableColumn<?, ?> nameColumn;
+    private TableColumn<EmployeeAttendance, String> nameColumn;
 
     @FXML
     private TextField nameField;
@@ -180,6 +185,15 @@ public class TrainingAssistantController {
 
 
 
+    private final ObservableList<String> monthsList = FXCollections.observableArrayList(
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+    );
+
+
+
+
+
     @FXML
     private Button saveButton;
 
@@ -221,6 +235,15 @@ public class TrainingAssistantController {
 
         showPane(trainingAssistantPane);
         highlightButton(individualPerformanceBtn);
+
+        monthComboBox.setItems(monthsList);
+        monthComboBox.setOnAction(event -> populateAttendanceTable());
+
+        // Set up static columns
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        epfColumn.setCellValueFactory(new PropertyValueFactory<>("epf"));
+        attendancePercentColumn.setCellValueFactory(new PropertyValueFactory<>("attendancePercentage"));
+
     }
 
 
@@ -522,7 +545,122 @@ public class TrainingAssistantController {
     }
 
 
+    private void populateAttendanceTable() {
+        String selectedMonth = monthComboBox.getValue();
+        if (selectedMonth == null) {
+            showError("Please select a month.");
+            return;
+        }
 
+        // Clear existing data and columns
+        attendanceTable.getItems().clear();
+        attendanceTable.getColumns().removeIf(column -> column.getText().startsWith("Day"));
+
+        // Fetch attendance data for the selected month
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            YearMonth yearMonth = getYearMonthFromSelectedMonth(selectedMonth);
+            int daysInMonth = yearMonth.lengthOfMonth();
+
+            // Add dynamic columns for each day
+            for (int day = 1; day <= daysInMonth; day++) {
+                TableColumn<EmployeeAttendance, Boolean> dayColumn = new TableColumn<>("Day " + day);
+                final int dayIndex = day;
+                dayColumn.setCellValueFactory(data -> data.getValue().getDailyAttendanceProperty(dayIndex));
+                attendanceTable.getColumns().add(dayColumn);
+            }
+
+            // Query to fetch attendance data from employee_performance table
+            String query = "SELECT name, epf, date, attendance " +
+                    "FROM employee_performance " +
+                    "WHERE EXTRACT(MONTH FROM date) = ? AND EXTRACT(YEAR FROM date) = ? " +
+                    "ORDER BY epf, date";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, yearMonth.getMonthValue());
+            stmt.setInt(2, yearMonth.getYear());
+
+            ResultSet rs = stmt.executeQuery();
+
+            // Map to store employee attendance
+            List<EmployeeAttendance> employeeAttendances = new ArrayList<>();
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String epf = rs.getString("epf");
+                Date attendanceDate = rs.getDate("date");
+                boolean isPresent = rs.getBoolean("attendance");
+
+                // Find or create EmployeeAttendance object
+                EmployeeAttendance employeeAttendance = employeeAttendances.stream()
+                        .filter(e -> e.getEpf().equals(epf))
+                        .findFirst()
+                        .orElseGet(() -> {
+                            EmployeeAttendance newEntry = new EmployeeAttendance(name, epf, daysInMonth);
+                            employeeAttendances.add(newEntry);
+                            return newEntry;
+                        });
+
+                // Set attendance for the day
+                if (attendanceDate != null) {
+                    int day = attendanceDate.toLocalDate().getDayOfMonth();
+                    employeeAttendance.setAttendance(day, isPresent);
+                }
+            }
+
+            // Calculate attendance percentages
+            employeeAttendances.forEach(e -> e.calculateAttendancePercentage(20));
+
+            // Add data to the table
+            attendanceTable.setItems(FXCollections.observableArrayList(employeeAttendances));
+        } catch (Exception e) {
+            e.printStackTrace();
+            showError("Failed to load attendance data: " + e.getMessage());
+        }
+    }
+
+    private YearMonth getYearMonthFromSelectedMonth(String selectedMonth) {
+        int monthIndex = monthsList.indexOf(selectedMonth) + 1;
+        int currentYear = LocalDate.now().getYear();
+        return YearMonth.of(currentYear, monthIndex);
+    }
+
+    // Inner class for table data representation
+    public static class EmployeeAttendance {
+        private final String name;
+        private final String epf;
+        private final List<Boolean> dailyAttendance;
+        private double attendancePercentage;
+
+        public EmployeeAttendance(String name, String epf, int daysInMonth) {
+            this.name = name;
+            this.epf = epf;
+            this.dailyAttendance = new ArrayList<>(Collections.nCopies(daysInMonth, false));
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getEpf() {
+            return epf;
+        }
+
+        public double getAttendancePercentage() {
+            return attendancePercentage;
+        }
+
+        public void setAttendance(int day, boolean isPresent) {
+            dailyAttendance.set(day - 1, isPresent);
+        }
+
+        public ObservableValue<Boolean> getDailyAttendanceProperty(int day) {
+            return new SimpleBooleanProperty(dailyAttendance.get(day - 1));
+        }
+
+        public void calculateAttendancePercentage(int totalWorkingDays) {
+            long presentDays = dailyAttendance.stream().filter(Boolean::booleanValue).count();
+            attendancePercentage = (presentDays / (double) totalWorkingDays) * 100;
+        }
+    }
 
 
 }

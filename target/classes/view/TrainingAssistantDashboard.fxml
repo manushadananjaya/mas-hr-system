@@ -49,7 +49,7 @@
                     <children>
                         <Button fx:id="individualPerformanceBtn" maxWidth="Infinity" onAction="#individualPerformanceBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Individual Performance" />
                         <Button fx:id="performanceFormBtn" maxWidth="Infinity" onAction="#performanceFormBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Performance Form" />
-                        <Button fx:id="attendanceBtn" maxWidth="Infinity" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Attendance" />
+                        <Button fx:id="attendanceBtn" maxWidth="Infinity" onAction="#attendanceBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Attendance" />
                         <VBox VBox.vgrow="ALWAYS" />
                         <Button fx:id="logOutBtn" maxWidth="Infinity" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Log Out" />
                     </children>
@@ -190,7 +190,7 @@
 
                         <!-- Performance Form Section -->
                         <!-- Training Performance Pane -->
-                        <AnchorPane fx:id="trainingPerformancePane" styleClass="content-pane">
+                        <AnchorPane fx:id="trainingPerformancePane" styleClass="content-pane" visible="false">
                             <children>
                                 <!-- Search Section -->
                                 <HBox alignment="CENTER_LEFT" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
@@ -251,17 +251,17 @@
 
                                             <Label text="Operation 03" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                                             <ProgressBar fx:id="operation3Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                            <Label fx:id="operation3Label"  GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                            <Label fx:id="operation3Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
 
 
                                             <Label text="Operation 04" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                                             <ProgressBar fx:id="operation4Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                            <Label fx:id="operation4Label"  GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                            <Label fx:id="operation4Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
 
 
                                             <Label text="Operation 05" GridPane.columnIndex="0" GridPane.rowIndex="4" />
                                             <ProgressBar fx:id="operation5Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                            <Label fx:id="operation5Label"  GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                            <Label fx:id="operation5Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
 
 
                                             <Label text="Operation 06" GridPane.columnIndex="0" GridPane.rowIndex="5" />
@@ -339,7 +339,7 @@
                             </children>
                         </AnchorPane>
                         <!-- Attendance Section -->
-                        <AnchorPane fx:id="attendancePane" visible="false">
+                        <AnchorPane fx:id="attendancePane">
                             <children>
                                 <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                     <Label style="-fx-font-size: 20px;" text="Attendance for the Month" />
