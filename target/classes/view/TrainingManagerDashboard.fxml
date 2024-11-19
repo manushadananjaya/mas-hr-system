@@ -5,6 +5,8 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TableColumn?>
@@ -15,47 +17,39 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.ComboBox?>
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manusha.mas.controller.TrainingManagerController">
+<AnchorPane prefHeight="894.0" prefWidth="1220.0" stylesheets="@TrainingManagerDashboardStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manusha.mas.controller.TrainingManagerController">
     <children>
-        <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane layoutX="87.0" layoutY="77.0" prefHeight="914.0" prefWidth="1138.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="77.0">
             <top>
                 <!-- Header Section -->
-                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #1a237e; -fx-padding: 10px;">
-                    <children>
-                        <Label style="-fx-font-size: 24px; -fx-text-fill: white;" text="Training Manager Dashboard">
-                            <HBox.margin>
-                                <Insets left="20.0" />
-                            </HBox.margin>
-                        </Label>
-                        <Region HBox.hgrow="ALWAYS" />
-                        <Label style="-fx-font-size: 24px; -fx-text-fill: white;" text="MAS Intimates" />
-                    </children>
-                </HBox>
+                <HBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="1220.0" />
             </top>
 
             <left>
                 <!-- Sidebar Navigation -->
-                <VBox prefWidth="250.0" style="-fx-background-color: #1a237e; -fx-padding: 20px;">
+                <VBox prefWidth="250.0">
                     <children>
                         <Button fx:id="trainingPerformanceBtn" maxWidth="Infinity" onAction="#trainingPerformanceBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Training Performance" />
                         <Button fx:id="requestedDetailsBtn" maxWidth="Infinity" onAction="#requestedDetailsBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Requested Details" />
                         <Button fx:id="requirementFormBtn" maxWidth="Infinity" onAction="#requirementFormBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Requirement Form" />
-                        <VBox VBox.vgrow="ALWAYS" />
-                        <Button fx:id="logOutBtn" maxWidth="Infinity" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Log Out" />
+                        <VBox prefHeight="648.0" prefWidth="233.0" VBox.vgrow="ALWAYS">
+                     <children>
+                              <Button fx:id="logOutBtn" maxWidth="Infinity" prefHeight="32.0" prefWidth="250.0" text="Log Out">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin></Button>
+                     </children></VBox>
                     </children>
                 </VBox>
             </left>
 
             <center>
                 <!-- Main Content Area with Sections -->
-                <StackPane>
+                <StackPane prefHeight="748.0" prefWidth="970.0">
                     <children>
                         <!-- Training Performance Section (Unchanged) -->
                         <!-- Training Performance Pane -->
@@ -233,9 +227,9 @@
 
 
 
-                        <AnchorPane fx:id="requirementFormPane">
+                        <AnchorPane fx:id="requirementFormPane" prefHeight="756.0" prefWidth="944.0">
                             <children>
-                                <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                <VBox prefHeight="622.0" prefWidth="863.0" spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="92.0" AnchorPane.topAnchor="20.0">
                                     <HBox spacing="20">
                                         <!-- Left Requirement Form -->
                                         <VBox prefWidth="300" spacing="10">
@@ -255,50 +249,50 @@
                                         <GridPane hgap="20" prefHeight="269.0" prefWidth="547.0" vgap="20">
                                             <!-- Operation 1 -->
                                             <VBox prefHeight="107.0" prefWidth="211.0" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                                <Button text="Operation 1" />
-                                                <Label text="Name 1" fx:id="topPerformer1Op1" />
-                                                <Label text="Name 2" fx:id="topPerformer2Op1" />
-                                                <Label text="Name 3" fx:id="topPerformer3Op1" />
+                                                <Button text="Operation 1" fx:id="operationBtn"/>
+                                                <Label fx:id="topPerformer1Op1" text="Name 1" />
+                                                <Label fx:id="topPerformer2Op1" text="Name 2" />
+                                                <Label fx:id="topPerformer3Op1" text="Name 3" />
                                             </VBox>
 
                                             <!-- Operation 2 -->
                                             <VBox prefHeight="107.0" prefWidth="299.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                                                <Button text="Operation 2" />
-                                                <Label text="Name 1" fx:id="topPerformer1Op2" />
-                                                <Label text="Name 2" fx:id="topPerformer2Op2" />
-                                                <Label text="Name 3" fx:id="topPerformer3Op2" />
+                                                <Button text="Operation 2" fx:id="operationBtn2" />
+                                                <Label fx:id="topPerformer1Op2" text="Name 1" />
+                                                <Label fx:id="topPerformer2Op2" text="Name 2" />
+                                                <Label fx:id="topPerformer3Op2" text="Name 3" />
                                             </VBox>
 
                                             <!-- Operation 3 -->
                                             <VBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                                                <Button text="Operation 3" />
-                                                <Label text="Name 1" fx:id="topPerformer1Op3" />
-                                                <Label text="Name 2" fx:id="topPerformer2Op3" />
-                                                <Label text="Name 3" fx:id="topPerformer3Op3" />
+                                                <Button text="Operation 3" fx:id="operationBtn3" />
+                                                <Label fx:id="topPerformer1Op3" text="Name 1" />
+                                                <Label fx:id="topPerformer2Op3" text="Name 2" />
+                                                <Label fx:id="topPerformer3Op3" text="Name 3" />
                                             </VBox>
 
                                             <!-- Operation 4 -->
                                             <VBox prefHeight="110.0" prefWidth="179.0" spacing="10" GridPane.rowIndex="1">
-                                                <Button text="Operation 4" />
-                                                <Label text="Name 1" fx:id="topPerformer1Op4" />
-                                                <Label text="Name 2" fx:id="topPerformer2Op4" />
-                                                <Label text="Name 3" fx:id="topPerformer3Op4" />
+                                                <Button text="Operation 4" fx:id="operationBtn4" />
+                                                <Label fx:id="topPerformer1Op4" text="Name 1" />
+                                                <Label fx:id="topPerformer2Op4" text="Name 2" />
+                                                <Label fx:id="topPerformer3Op4" text="Name 3" />
                                             </VBox>
 
                                             <!-- Operation 5 -->
                                             <VBox prefHeight="110.0" prefWidth="168.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                <Button text="Operation 5" />
-                                                <Label text="Name 1" fx:id="topPerformer1Op5" />
-                                                <Label text="Name 2" fx:id="topPerformer2Op5" />
-                                                <Label text="Name 3" fx:id="topPerformer3Op5" />
+                                                <Button text="Operation 5" fx:id="operationBtn5" />
+                                                <Label fx:id="topPerformer1Op5" text="Name 1" />
+                                                <Label fx:id="topPerformer2Op5" text="Name 2" />
+                                                <Label fx:id="topPerformer3Op5" text="Name 3" />
                                             </VBox>
 
                                             <!-- Operation 6 -->
                                             <VBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                                <Button text="Operation 6" />
-                                                <Label text="Name 1" fx:id="topPerformer1Op6" />
-                                                <Label text="Name 2" fx:id="topPerformer2Op6" />
-                                                <Label text="Name 3" fx:id="topPerformer3Op6" />
+                                                <Button text="Operation 6" fx:id="operationBtn6" />
+                                                <Label fx:id="topPerformer1Op6" text="Name 1" />
+                                                <Label fx:id="topPerformer2Op6" text="Name 2" />
+                                                <Label fx:id="topPerformer3Op6" text="Name 3" />
                                             </VBox>
                                     <columnConstraints>
                                     <ColumnConstraints maxWidth="203.58868408203125" minWidth="178.22393798828125" prefWidth="178.22393798828125" />
@@ -312,7 +306,7 @@
                                         </GridPane>
                                     </HBox>
                                     <Label text="Previous Submissions" />
-                                    <TableView fx:id="submittedRequirementsTable" prefHeight="352.0" prefWidth="910.0">
+                                    <TableView fx:id="submittedRequirementsTable" prefHeight="331.0" prefWidth="858.0">
                                         <columns>
                                             <!-- Column for IEEPF -->
                                             <TableColumn fx:id="ieepfReqColumn" prefWidth="125.0" text="IEEPF" />
@@ -324,10 +318,10 @@
                                             <TableColumn fx:id="nameReqColumn" prefWidth="234.0" text="Name" />
 
                                             <!-- Column for Section -->
-                                            <TableColumn fx:id="sectionReqColumn" prefWidth="189.0" text="Section" />
+                                            <TableColumn fx:id="sectionReqColumn" prefWidth="162.60772705078125" text="Section" />
 
                                             <!-- Column for Date -->
-                                            <TableColumn fx:id="dateReqColumn" prefWidth="179.0" text="Date" />
+                                            <TableColumn fx:id="dateReqColumn" prefWidth="153.39227294921875" text="Date" />
                                         </columns>
                                     </TableView>
                                 </VBox>
