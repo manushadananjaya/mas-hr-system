@@ -184,3 +184,55 @@
     -fx-background-color: rgba(255, 255, 255, 0.3); /* Slightly transparent plot area */
 }
 
+/* General Button Style */
+.button {
+    -fx-min-width: 100px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+}
+
+/* Save Button (Forest Green) */
+#saveBtn {
+    -fx-background-color: forestgreen;
+}
+
+#saveBtn:hover {
+    -fx-background-color: darkgreen;
+}
+
+/* Edit Button (Normal Color) */
+#editBtn {
+    -fx-background-color: forestgreen; /* A subtle green */
+}
+
+#editBtn:hover {
+    -fx-background-color: darkgreen;
+}
+
+/* Delete Button (Red) */
+#deleteBtn {
+    -fx-background-color: red;
+}
+
+#deleteBtn:hover {
+    -fx-background-color: darkred;
+}
+
+/* Search Button (Forest Green) */
+#SearchBtn {
+    -fx-background-color: forestgreen;
+    -fx-pref-height: 34px;
+    -fx-pref-width: 76px;
+}
+
+#SearchBtn:hover {
+    -fx-background-color: darkgreen;
+}
+
+/* Additional Hover Effects */
+.button:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0.5, 0, 0);
+}
+
