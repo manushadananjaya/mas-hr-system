@@ -150,7 +150,7 @@ public class TrainingManagerController {
     private TextField ieepf_no;
 
     @FXML
-    private TextField req_operation;
+    private ComboBox<String> req_operation;
 
     @FXML
     private TextField req_name;
@@ -196,6 +196,18 @@ public class TrainingManagerController {
         // Load submitted requirements into the table
         loadSubmittedRequirements();
         updateTopPerformers(); // Load top performers
+
+        req_operation.getItems().addAll(
+                "Operation 1",
+                "Operation 2",
+                "Operation 3",
+                "Operation 4",
+                "Operation 5",
+                "Operation 6"
+        );
+
+        // Optionally set a default value
+        req_operation.setValue("Operation 1");
 
 
 
@@ -454,7 +466,7 @@ public class TrainingManagerController {
     private void handleSubmitRequirement(ActionEvent event) {
         // Collect form data
         String epfNo = ieepf_no.getText();
-        String operation = req_operation.getText();
+        String operation = req_operation.getValue();
         String name = req_name.getText();
         String section = req_section.getText();
         LocalDate date = req_date.getValue();
@@ -485,6 +497,7 @@ public class TrainingManagerController {
             if (rowsInserted > 0) {
                 showSuccess("Requirement submitted successfully!");
                 clearRequirementForm();
+                loadSubmittedRequirements();
             } else {
                 showError("Failed to submit the requirement.");
             }
@@ -499,7 +512,7 @@ public class TrainingManagerController {
 
     private void clearRequirementForm() {
         ieepf_no.clear();
-        req_operation.clear();
+        req_operation.setValue(null);
         req_name.clear();
         req_section.clear();
         req_date.setValue(null);
