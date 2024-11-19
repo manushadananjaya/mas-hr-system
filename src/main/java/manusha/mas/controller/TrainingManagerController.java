@@ -9,6 +9,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import manusha.mas.model.RequireDetails;
 import manusha.mas.util.DatabaseConnection;
 
 import java.sql.Connection;
@@ -27,6 +28,24 @@ public class TrainingManagerController {
 
     @FXML
     private TableColumn<RequestDetails, Integer> countColumn;
+
+    @FXML
+    private TableView<RequireDetails> submittedRequirementsTable;
+
+    @FXML
+    private TableColumn<RequireDetails, String> ieepfReqColumn;
+
+    @FXML
+    private TableColumn<RequireDetails, String> operationReqColumn;
+
+    @FXML
+    private TableColumn<RequireDetails, String> nameReqColumn;
+
+    @FXML
+    private TableColumn<RequireDetails, String> sectionReqColumn;
+
+    @FXML
+    private TableColumn<RequireDetails, LocalDate> dateReqColumn;
 
     @FXML
     private TextField designationField;
@@ -145,10 +164,7 @@ public class TrainingManagerController {
     private ObservableList<RequestDetails> requestedDetailsList = FXCollections.observableArrayList();
 
 
-    @FXML
-    void handleSearchEPF(ActionEvent event) {
 
-    }
 
 
     public void initialize() {
@@ -157,6 +173,15 @@ public class TrainingManagerController {
         highlightButton(trainingPerformanceBtn);
         setupRequestedDetailsTable();
         loadRequestedDetails();
+
+        ieepfReqColumn.setCellValueFactory(new PropertyValueFactory<>("ieepf"));
+        operationReqColumn.setCellValueFactory(new PropertyValueFactory<>("operation"));
+        nameReqColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        sectionReqColumn.setCellValueFactory(new PropertyValueFactory<>("section"));
+        dateReqColumn.setCellValueFactory(new PropertyValueFactory<>("reqDate"));
+
+        // Load submitted requirements into the table
+        loadSubmittedRequirements();
 
     }
 
@@ -462,5 +487,30 @@ public class TrainingManagerController {
         req_name.clear();
         req_section.clear();
         req_date.setValue(null);
+    }
+
+    private void loadSubmittedRequirements() {
+        ObservableList<RequireDetails> requirementsList = FXCollections.observableArrayList();
+        String query = "SELECT ieepf, operation, name, section, req_date FROM requirement";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String ieepf = resultSet.getString("ieepf");
+                String operation = resultSet.getString("operation");
+                String name = resultSet.getString("name");
+                String section = resultSet.getString("section");
+                LocalDate reqDate = resultSet.getDate("req_date").toLocalDate();
+
+                requirementsList.add(new RequireDetails(ieepf, operation, name, section, reqDate));
+            }
+
+            submittedRequirementsTable.setItems(requirementsList);
+
+        } catch (Exception e) {
+            showError("Error loading submitted requirements: " + e.getMessage());
+        }
     }
 }
