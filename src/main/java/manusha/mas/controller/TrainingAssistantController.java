@@ -677,6 +677,8 @@ public class TrainingAssistantController {
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("MAS Intimates");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

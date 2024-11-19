@@ -236,3 +236,11 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0.5, 0, 0);
 }
 
+#requiredDatePicker{
+    -fx-text-fill: black;
+}
+
+#requiredDatePicker .label {
+    -fx-text-fill: black; /* Set label text color to black */
+
+}
