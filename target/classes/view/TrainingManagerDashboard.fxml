@@ -254,51 +254,51 @@
                                             <!-- Operation 1 -->
                                             <VBox prefHeight="107.0" prefWidth="211.0" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                                 <Button text="Operation 1" />
-                                                <Label text="Name 1" />
-                                                <Label text="Name 2" />
-                                                <Label text="Name 3" />
+                                                <Label text="Name 1" fx:id="topPerformer1Op1" />
+                                                <Label text="Name 2" fx:id="topPerformer2Op1" />
+                                                <Label text="Name 3" fx:id="topPerformer3Op1" />
                                             </VBox>
 
                                             <!-- Operation 2 -->
                                             <VBox prefHeight="107.0" prefWidth="299.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                                 <Button text="Operation 2" />
-                                                <Label text="Name 1" />
-                                                <Label text="Name 2" />
-                                                <Label text="Name 3" />
+                                                <Label text="Name 1" fx:id="topPerformer1Op2" />
+                                                <Label text="Name 2" fx:id="topPerformer2Op2" />
+                                                <Label text="Name 3" fx:id="topPerformer3Op2" />
                                             </VBox>
 
                                             <!-- Operation 3 -->
                                             <VBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="0">
                                                 <Button text="Operation 3" />
-                                                <Label text="Name 1" />
-                                                <Label text="Name 2" />
-                                                <Label text="Name 3" />
+                                                <Label text="Name 1" fx:id="topPerformer1Op3" />
+                                                <Label text="Name 2" fx:id="topPerformer2Op3" />
+                                                <Label text="Name 3" fx:id="topPerformer3Op3" />
                                             </VBox>
 
                                             <!-- Operation 4 -->
                                             <VBox prefHeight="110.0" prefWidth="179.0" spacing="10" GridPane.rowIndex="1">
                                                 <Button text="Operation 4" />
-                                                <Label text="Name 1" />
-                                                <Label text="Name 2" />
-                                                <Label text="Name 3" />
+                                                <Label text="Name 1" fx:id="topPerformer1Op4" />
+                                                <Label text="Name 2" fx:id="topPerformer2Op4" />
+                                                <Label text="Name 3" fx:id="topPerformer3Op4" />
                                             </VBox>
 
                                             <!-- Operation 5 -->
                                             <VBox prefHeight="110.0" prefWidth="168.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                 <Button text="Operation 5" />
-                                                <Label text="Name 1" />
-                                                <Label text="Name 2" />
-                                                <Label text="Name 3" />
+                                                <Label text="Name 1" fx:id="topPerformer1Op5" />
+                                                <Label text="Name 2" fx:id="topPerformer2Op5" />
+                                                <Label text="Name 3" fx:id="topPerformer3Op5" />
                                             </VBox>
 
                                             <!-- Operation 6 -->
                                             <VBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                                 <Button text="Operation 6" />
-                                                <Label text="Name 1" />
-                                                <Label text="Name 2" />
-                                                <Label text="Name 3" />
+                                                <Label text="Name 1" fx:id="topPerformer1Op6" />
+                                                <Label text="Name 2" fx:id="topPerformer2Op6" />
+                                                <Label text="Name 3" fx:id="topPerformer3Op6" />
                                             </VBox>
-                                 <columnConstraints>
+                                    <columnConstraints>
                                     <ColumnConstraints maxWidth="203.58868408203125" minWidth="178.22393798828125" prefWidth="178.22393798828125" />
                                     <ColumnConstraints maxWidth="266.5887451171875" minWidth="140.42962646484375" prefWidth="170.27606201171875" />
                                     <ColumnConstraints maxWidth="162.57037353515625" minWidth="58.4112548828125" prefWidth="161.467529296875" />

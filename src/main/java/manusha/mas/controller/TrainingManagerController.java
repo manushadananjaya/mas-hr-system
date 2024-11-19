@@ -163,6 +163,19 @@ public class TrainingManagerController {
 
     private ObservableList<RequestDetails> requestedDetailsList = FXCollections.observableArrayList();
 
+    @FXML
+    private Label topPerformer1Op1, topPerformer2Op1, topPerformer3Op1;
+    @FXML
+    private Label topPerformer1Op2, topPerformer2Op2, topPerformer3Op2;
+    @FXML
+    private Label topPerformer1Op3, topPerformer2Op3, topPerformer3Op3;
+    @FXML
+    private Label topPerformer1Op4, topPerformer2Op4, topPerformer3Op4;
+    @FXML
+    private Label topPerformer1Op5, topPerformer2Op5, topPerformer3Op5;
+    @FXML
+    private Label topPerformer1Op6, topPerformer2Op6, topPerformer3Op6;
+
 
 
 
@@ -182,6 +195,9 @@ public class TrainingManagerController {
 
         // Load submitted requirements into the table
         loadSubmittedRequirements();
+        updateTopPerformers(); // Load top performers
+
+
 
     }
 
@@ -513,4 +529,86 @@ public class TrainingManagerController {
             showError("Error loading submitted requirements: " + e.getMessage());
         }
     }
+
+    //top operartion performers update
+
+    private void updateTopPerformers() {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            // Map to hold top performers for each operation
+            Map<String, List<String>> topPerformersMap = new HashMap<>();
+
+            // Query for each operation
+            for (int i = 1; i <= 6; i++) {
+                String operationColumn = "operation" + i;
+                String query = "SELECT name, " + operationColumn + " AS score " +
+                        "FROM employee_performance " +
+                        "WHERE " + operationColumn + " IS NOT NULL " +
+                        "ORDER BY score DESC " +
+                        "LIMIT 3";
+
+                try (PreparedStatement statement = connection.prepareStatement(query);
+                     ResultSet resultSet = statement.executeQuery()) {
+
+                    List<String> topPerformers = new ArrayList<>();
+                    while (resultSet.next()) {
+                        topPerformers.add(resultSet.getString("name"));
+                    }
+
+                    // Store the results in the map
+                    topPerformersMap.put(operationColumn, topPerformers);
+                }
+            }
+
+            // Update the labels with the fetched names
+            setTopPerformersLabels(topPerformersMap);
+
+        } catch (Exception e) {
+            showError("Error updating top performers: " + e.getMessage());
+        }
+    }
+
+    private void setTopPerformersLabels(Map<String, List<String>> topPerformersMap) {
+        // Update labels for Operation 1
+        updateLabelsForOperation("Operation 1", topPerformersMap.getOrDefault("operation1", Collections.emptyList()),
+                topPerformer1Op1, topPerformer2Op1, topPerformer3Op1);
+
+        // Update labels for Operation 2
+        updateLabelsForOperation("Operation 2", topPerformersMap.getOrDefault("operation2", Collections.emptyList()),
+                topPerformer1Op2, topPerformer2Op2, topPerformer3Op2);
+
+        // Continue for all operations...
+        updateLabelsForOperation("Operation 3", topPerformersMap.getOrDefault("operation3", Collections.emptyList()),
+                topPerformer1Op3, topPerformer2Op3, topPerformer3Op3);
+
+        updateLabelsForOperation("Operation 4", topPerformersMap.getOrDefault("operation4", Collections.emptyList()),
+                topPerformer1Op4, topPerformer2Op4, topPerformer3Op4);
+
+        updateLabelsForOperation("Operation 5", topPerformersMap.getOrDefault("operation5", Collections.emptyList()),
+                topPerformer1Op5, topPerformer2Op5, topPerformer3Op5);
+
+        updateLabelsForOperation("Operation 6", topPerformersMap.getOrDefault("operation6", Collections.emptyList()),
+                topPerformer1Op6, topPerformer2Op6, topPerformer3Op6);
+    }
+
+    private void updateLabelsForOperation(String operation, List<String> topPerformers,
+                                          Label label1, Label label2, Label label3) {
+        if (topPerformers.size() > 0) {
+            label1.setText(topPerformers.get(0));
+        } else {
+            label1.setText("No Data");
+        }
+
+        if (topPerformers.size() > 1) {
+            label2.setText(topPerformers.get(1));
+        } else {
+            label2.setText("No Data");
+        }
+
+        if (topPerformers.size() > 2) {
+            label3.setText(topPerformers.get(2));
+        } else {
+            label3.setText("No Data");
+        }
+    }
+
 }
