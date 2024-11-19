@@ -141,7 +141,7 @@
 
 /* TableView styling */
 .custom-table {
-    -fx-background-color: rgba(255, 255, 255, 0.5); /* Half-transparent white */
+    -fx-background-color: rgba(255, 255, 255, 0.3); /* Half-transparent white */
     -fx-border-color: transparent; /* Remove visible border */
 }
 

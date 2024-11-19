@@ -41,7 +41,7 @@
                         <Button fx:id="attendanceBtn" maxWidth="Infinity" onAction="#attendanceBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Attendance" />
                         <VBox VBox.vgrow="ALWAYS">
                      <children>
-                              <Button fx:id="logOutBtn" maxWidth="Infinity" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Log Out">
+                              <Button fx:id="logOutBtn" onAction="#handleLogout" maxWidth="Infinity" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Log Out">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
