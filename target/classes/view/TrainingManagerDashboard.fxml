@@ -20,6 +20,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.DatePicker?>
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manusha.mas.controller.TrainingManagerController">
     <children>
         <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -57,7 +58,7 @@
                     <children>
                         <!-- Training Performance Section (Unchanged) -->
                         <!-- Training Performance Pane -->
-                        <AnchorPane fx:id="trainingPerformancePane" styleClass="content-pane">
+                        <AnchorPane fx:id="trainingPerformancePane" styleClass="content-pane" visible="false">
                             <children>
                                 <!-- Search Section -->
                                 <HBox alignment="CENTER_LEFT" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
@@ -231,7 +232,7 @@
 
 
 
-                        <AnchorPane fx:id="requirementFormPane" visible="false">
+                        <AnchorPane fx:id="requirementFormPane">
                             <children>
                                 <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                     <HBox spacing="20">
@@ -239,13 +240,13 @@
                                         <VBox prefWidth="300" spacing="10">
                                             <Label text="Requirement Form" />
 
-                                            <TextField promptText="IEEPF" />
-                                            <TextField promptText="Operation" />
-                                            <TextField promptText="Name" />
-                                            <TextField promptText="Section" />
-                                            <TextField promptText="Date" />
+                                            <TextField fx:id="ieepf_no" promptText="IEEPF" />
+                                            <TextField fx:id="req_operation" promptText="Operation" />
+                                            <TextField fx:id="req_name" promptText="Name" />
+                                            <TextField fx:id="req_section" promptText="Section" />
+                                            <DatePicker fx:id="req_date" promptText="Select Date" />
 
-                                            <Button text="Submit" />
+                                            <Button onAction="#handleSubmitRequirement" text="Submit" />
                                         </VBox>
 
                                         <!-- Center Operations Section -->

@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.*;
 
 import manusha.mas.model.RequestDetails;
@@ -125,6 +126,21 @@ public class TrainingManagerController {
 
     @FXML
     private AnchorPane trainingPerformancePane;
+
+    @FXML
+    private TextField ieepf_no;
+
+    @FXML
+    private TextField req_operation;
+
+    @FXML
+    private TextField req_name;
+
+    @FXML
+    private TextField req_section;
+
+    @FXML
+    private DatePicker req_date;
 
     private ObservableList<RequestDetails> requestedDetailsList = FXCollections.observableArrayList();
 
@@ -329,7 +345,6 @@ public class TrainingManagerController {
     }
 
 
-
     private void updateSkillMatrix(Map<String, Double> operationAverages) {
         setProgressBar(operation1Bar, operation1Label, operationAverages.getOrDefault("Operation 1", 0.0));
         setProgressBar(operation2Bar, operation2Label, operationAverages.getOrDefault("Operation 2", 0.0));
@@ -393,6 +408,59 @@ public class TrainingManagerController {
     }
 
 
+    //reqirement form section
+    @FXML
+    private void handleSubmitRequirement(ActionEvent event) {
+        // Collect form data
+        String epfNo = ieepf_no.getText();
+        String operation = req_operation.getText();
+        String name = req_name.getText();
+        String section = req_section.getText();
+        LocalDate date = req_date.getValue();
+
+        // Validate inputs
+        if (epfNo.isEmpty() || operation.isEmpty() || name.isEmpty() || section.isEmpty() || date == null) {
+            showError("All fields must be filled out.");
+            return;
+        }
 
 
+        // Convert LocalDate to SQL Date
+        Date sqlDate = Date.valueOf(date);
+
+        // Insert into the database
+        String query = "INSERT INTO requirement (ieepf, operation, name, section, req_date) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, epfNo);
+            preparedStatement.setString(2, operation);
+            preparedStatement.setString(3, name);
+            preparedStatement.setString(4, section);
+            preparedStatement.setDate(5, sqlDate);
+
+            int rowsInserted = preparedStatement.executeUpdate();
+            if (rowsInserted > 0) {
+                showSuccess("Requirement submitted successfully!");
+                clearRequirementForm();
+            } else {
+                showError("Failed to submit the requirement.");
+            }
+        } catch (Exception e) {
+            showError("Error submitting requirement: " + e.getMessage());
+        }
+    }
+    private void showSuccess(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+        alert.show();
+    }
+
+    private void clearRequirementForm() {
+        ieepf_no.clear();
+        req_operation.clear();
+        req_name.clear();
+        req_section.clear();
+        req_date.setValue(null);
+    }
 }
