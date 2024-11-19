@@ -79,7 +79,7 @@ public class MainFormController {
                 String fxmlFile = switch (selectedRole) {
                     case "Admin" -> "/view/AdminDashboard.fxml";
                     case "IE" -> "/view/IEDashboard.fxml";
-                    case "Training Manager" -> "/view/TrainingAssistantDashboard.fxml";
+                    case "Training Manager" -> "/view/TrainingManagerDashboard.fxml";
                     case "Training Assistant" -> "/view/TrainingAssistantDashboard.fxml";
                     default -> throw new IllegalStateException("Unexpected role: " + selectedRole);
                 };

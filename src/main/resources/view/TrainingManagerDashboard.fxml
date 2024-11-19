@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manusha.mas.controller.TrainingManagerController">
+    <children>
+        <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <!-- Header Section -->
+                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #1a237e; -fx-padding: 10px;">
+                    <children>
+                        <Label style="-fx-font-size: 24px; -fx-text-fill: white;" text="Training Manager Dashboard">
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label style="-fx-font-size: 24px; -fx-text-fill: white;" text="MAS Intimates" />
+                    </children>
+                </HBox>
+            </top>
+
+            <left>
+                <!-- Sidebar Navigation -->
+                <VBox prefWidth="250.0" style="-fx-background-color: #1a237e; -fx-padding: 20px;">
+                    <children>
+                        <Button fx:id="trainingPerformanceBtn" maxWidth="Infinity" onAction="#trainingPerformanceBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Training Performance" />
+                        <Button fx:id="requestedDetailsBtn" maxWidth="Infinity" onAction="#requestedDetailsBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Requested Details" />
+                        <Button fx:id="requirementFormBtn" maxWidth="Infinity" onAction="#requirementFormBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Requirement Form" />
+                        <VBox VBox.vgrow="ALWAYS" />
+                        <Button fx:id="logOutBtn" maxWidth="Infinity" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Log Out" />
+                    </children>
+                </VBox>
+            </left>
+
+            <center>
+                <!-- Main Content Area with Sections -->
+                <StackPane>
+                    <children>
+                        <!-- Training Performance Section (Unchanged) -->
+                        <!-- Training Performance Pane -->
+                        <AnchorPane fx:id="trainingPerformancePane" styleClass="content-pane">
+                            <children>
+                                <!-- Search Section -->
+                                <HBox alignment="CENTER_LEFT" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <TextField fx:id="searchField" prefHeight="35.0" prefWidth="300.0" promptText="Search here" styleClass="search-field" />
+                                    <Button fx:id="SearchBtn" mnemonicParsing="false" onAction="#handleSearchEPF" prefHeight="34.0" prefWidth="76.0" text="Search" />
+                                </HBox>
+
+                                <!-- Form and Skill Matrix Section -->
+                                <GridPane hgap="20" vgap="10" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="50" />
+                                        <ColumnConstraints percentWidth="50" />
+                                    </columnConstraints>
+
+                                    <!-- Left Side - Form Fields -->
+                                    <VBox spacing="10" styleClass="form-container" GridPane.columnIndex="0">
+                                        <GridPane hgap="10" vgap="10">
+                                            <Label text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                            <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                            <Label text="Designation" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                            <TextField fx:id="designationField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                            <Label text="Gender" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                            <TextField fx:id="genderField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                            <Label text="Training S/D" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                            <TextField fx:id="trainingField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                            <columnConstraints>
+                                                <ColumnConstraints />
+                                                <ColumnConstraints />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                            </rowConstraints>
+                                        </GridPane>
+                                    </VBox>
+
+                                    <!-- Right Side - Skill Matrix -->
+                                    <VBox spacing="10" styleClass="skill-matrix" GridPane.columnIndex="1">
+                                        <Label styleClass="section-header" text="Skill Matrix" />
+                                        <GridPane hgap="10" vgap="5">
+
+
+                                            <Label text="Operation 01" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                            <ProgressBar fx:id="operation1Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                            <Label fx:id="operation1Label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+
+
+
+                                            <Label text="Operation 02" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                            <ProgressBar fx:id="operation2Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                            <Label fx:id="operation2Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+
+
+                                            <Label text="Operation 03" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                            <ProgressBar fx:id="operation3Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                            <Label fx:id="operation3Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+
+
+                                            <Label text="Operation 04" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                            <ProgressBar fx:id="operation4Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                            <Label fx:id="operation4Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+
+
+                                            <Label text="Operation 05" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                                            <ProgressBar fx:id="operation5Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                            <Label fx:id="operation5Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+
+
+                                            <Label text="Operation 06" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                                            <ProgressBar fx:id="operation6Bar" prefWidth="200" progress="0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                            <Label fx:id="operation6Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+
+                                            <columnConstraints>
+                                                <ColumnConstraints />
+                                                <ColumnConstraints />
+                                                <ColumnConstraints />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                            </rowConstraints>
+
+                                            <!-- Add more operations similarly -->
+                                        </GridPane>
+                                    </VBox>
+                                    <rowConstraints>
+                                        <RowConstraints />
+                                    </rowConstraints>
+                                </GridPane>
+
+                                <!-- Charts Section -->
+                                <HBox spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="400.0">
+                                    <!-- Performance Tracking Chart -->
+                                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                                        <Label styleClass="section-header" text="Performance Tracking" />
+                                        <BarChart fx:id="performanceChart">
+                                            <xAxis>
+                                                <CategoryAxis label="Operations" />
+                                            </xAxis>
+                                            <yAxis>
+                                                <NumberAxis label="Time" />
+                                            </yAxis>
+                                        </BarChart>
+                                    </VBox>
+
+                                    <!-- Daily Tracking Charts -->
+                                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                                        <Label styleClass="section-header" text="Daily Tracking" />
+                                        <GridPane vgap="10">
+                                            <BarChart fx:id="performanceDailyChart" prefHeight="200" title="Performance" GridPane.rowIndex="0">
+                                                <xAxis>
+                                                    <CategoryAxis />
+                                                </xAxis>
+                                                <yAxis>
+                                                    <NumberAxis />
+                                                </yAxis>
+                                            </BarChart>
+
+                                            <BarChart fx:id="qualityChart" prefHeight="200" title="Quality" GridPane.rowIndex="1">
+                                                <xAxis>
+                                                    <CategoryAxis />
+                                                </xAxis>
+                                                <yAxis>
+                                                    <NumberAxis />
+                                                </yAxis>
+                                            </BarChart>
+                                            <columnConstraints>
+                                                <ColumnConstraints />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints />
+                                                <RowConstraints />
+                                            </rowConstraints>
+                                        </GridPane>
+                                    </VBox>
+                                </HBox>
+                            </children>
+                        </AnchorPane>
+
+                        <!-- Requested Details Section -->
+                        <AnchorPane fx:id="requestedDetailsPane" visible="false">
+                            <children>
+                                <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <Label style="-fx-font-size: 20px;" text="Requested Details" />
+
+                                    <!-- TableView to display requested details -->
+                                    <TableView fx:id="requestedDetailsTable" prefHeight="600" prefWidth="1200">
+                                        <columns>
+                                            <TableColumn fx:id="nameColumn" prefWidth="164.92941284179688" text="Name" />
+                                            <TableColumn fx:id="sectionColumn" prefWidth="119.05966186523438" text="Section" />
+                                            <TableColumn fx:id="moduleNoColumn" prefWidth="170.94033813476562" text="Module No" />
+                                            <TableColumn fx:id="operationColumn" prefWidth="185.36651611328125" text="Operation" />
+                                            <TableColumn fx:id="reqDateColumn" prefWidth="117.00189208984375" text="Req Date" />
+                                            <TableColumn fx:id="countColumn" prefWidth="154.41973876953125" text="Count" />
+                                        </columns>
+                                    </TableView>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+
+                        <!-- Requirement Form Section -->
+
+
+
+                        <AnchorPane fx:id="requirementFormPane" visible="false">
+                            <children>
+                                <VBox spacing="20" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                    <HBox spacing="20">
+                                        <!-- Left Requirement Form -->
+                                        <VBox prefWidth="300" spacing="10">
+                                            <Label text="Requirement Form" />
+
+                                            <TextField promptText="IEEPF" />
+                                            <TextField promptText="Operation" />
+                                            <TextField promptText="Name" />
+                                            <TextField promptText="Section" />
+                                            <TextField promptText="Date" />
+
+                                            <Button text="Submit" />
+                                        </VBox>
+
+                                        <!-- Center Operations Section -->
+                                        <GridPane hgap="20" prefHeight="269.0" prefWidth="547.0" vgap="20">
+                                            <!-- Operation 1 -->
+                                            <VBox prefHeight="107.0" prefWidth="211.0" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                                <Button text="Operation 1" />
+                                                <Label text="Name 1" />
+                                                <Label text="Name 2" />
+                                                <Label text="Name 3" />
+                                            </VBox>
+
+                                            <!-- Operation 2 -->
+                                            <VBox prefHeight="107.0" prefWidth="299.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                                <Button text="Operation 2" />
+                                                <Label text="Name 1" />
+                                                <Label text="Name 2" />
+                                                <Label text="Name 3" />
+                                            </VBox>
+
+                                            <!-- Operation 3 -->
+                                            <VBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                                <Button text="Operation 3" />
+                                                <Label text="Name 1" />
+                                                <Label text="Name 2" />
+                                                <Label text="Name 3" />
+                                            </VBox>
+
+                                            <!-- Operation 4 -->
+                                            <VBox prefHeight="110.0" prefWidth="179.0" spacing="10" GridPane.rowIndex="1">
+                                                <Button text="Operation 4" />
+                                                <Label text="Name 1" />
+                                                <Label text="Name 2" />
+                                                <Label text="Name 3" />
+                                            </VBox>
+
+                                            <!-- Operation 5 -->
+                                            <VBox prefHeight="110.0" prefWidth="168.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                <Button text="Operation 5" />
+                                                <Label text="Name 1" />
+                                                <Label text="Name 2" />
+                                                <Label text="Name 3" />
+                                            </VBox>
+
+                                            <!-- Operation 6 -->
+                                            <VBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                <Button text="Operation 6" />
+                                                <Label text="Name 1" />
+                                                <Label text="Name 2" />
+                                                <Label text="Name 3" />
+                                            </VBox>
+                                 <columnConstraints>
+                                    <ColumnConstraints maxWidth="203.58868408203125" minWidth="178.22393798828125" prefWidth="178.22393798828125" />
+                                    <ColumnConstraints maxWidth="266.5887451171875" minWidth="140.42962646484375" prefWidth="170.27606201171875" />
+                                    <ColumnConstraints maxWidth="162.57037353515625" minWidth="58.4112548828125" prefWidth="161.467529296875" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="107.0" minHeight="104.79437255859375" prefHeight="104.79437255859375" />
+                                    <RowConstraints maxHeight="109.20562744140625" minHeight="107.0" prefHeight="109.20562744140625" />
+                                 </rowConstraints>
+                                        </GridPane>
+                                    </HBox>
+                                    <Label text="Previous Submissions" />
+                                    <TableView prefHeight="352.0" prefWidth="910.0">
+                                        <columns>
+                                            <!-- Column for IEEPF -->
+                                            <TableColumn prefWidth="125.0" text="IEEPF" />
+
+                                            <!-- Column for Operation -->
+                                            <TableColumn prefWidth="182.0" text="Operation" />
+
+                                            <!-- Column for Name -->
+                                            <TableColumn prefWidth="234.0" text="Name" />
+
+                                            <!-- Column for Section -->
+                                            <TableColumn prefWidth="189.0" text="Section" />
+
+                                            <!-- Column for Date -->
+                                            <TableColumn prefWidth="179.0" text="Date" />
+                                        </columns>
+                                    </TableView>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+
+                    </children>
+                </StackPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>
