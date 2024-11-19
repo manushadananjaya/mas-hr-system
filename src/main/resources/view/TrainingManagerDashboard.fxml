@@ -62,7 +62,7 @@
                                 <!-- Search Section -->
                                 <HBox alignment="CENTER_LEFT" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                     <TextField fx:id="searchField" prefHeight="35.0" prefWidth="300.0" promptText="Search here" styleClass="search-field" />
-                                    <Button fx:id="SearchBtn" mnemonicParsing="false" onAction="#handleSearchEPF" prefHeight="34.0" prefWidth="76.0" text="Search" />
+                                    <Button fx:id="SearchBtn" mnemonicParsing="false" onAction="#handleSearchPerformance" prefHeight="34.0" prefWidth="76.0" text="Search" />
                                 </HBox>
 
                                 <!-- Form and Skill Matrix Section -->
