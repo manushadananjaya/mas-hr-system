@@ -21,44 +21,34 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manusha.mas.controller.IEDashboardController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@iedashboardstyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manusha.mas.controller.IEDashboardController">
     <children>
         <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
-                <HBox alignment="CENTER_LEFT" style="-fx-background-color: #1a237e; -fx-padding: 10px;">
+                <HBox alignment="CENTER_LEFT">
                     <children>
-                        <Label style="-fx-font-size: 24px; -fx-text-fill: white;" text="IE Informations">
-                            <HBox.margin>
-                                <Insets left="20.0" />
-                            </HBox.margin>
-                        </Label>
-                        <Region prefHeight="29.0" prefWidth="780.0" HBox.hgrow="ALWAYS" />
-                        <Label style="-fx-font-size: 24px; -fx-text-fill: red;" text="MAS Intimates">
-                            <HBox.margin>
-                                <Insets right="20.0" />
-                            </HBox.margin>
-                        </Label>
+                        <Region prefHeight="178.0" prefWidth="1200.0" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
             </top>
             <left>
-                <VBox prefWidth="250.0" style="-fx-background-color: #1a237e; -fx-padding: 20px;">
+                <VBox prefHeight="717.0" prefWidth="250.0">
                     <children>
-                        <VBox prefHeight="464.0" prefWidth="211.0" spacing="10" VBox.vgrow="ALWAYS">
+                        <VBox prefHeight="606.0" prefWidth="250.0" spacing="10" VBox.vgrow="ALWAYS">
                             <children>
-                                <Button fx:id="requestingFormBtn" maxWidth="Infinity" onAction="#handleRequestingFormBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Requesting Form" />
+                                <Button fx:id="requestingFormBtn" maxWidth="Infinity" onAction="#handleRequestingFormBtn" prefHeight="0.0" prefWidth="250.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Requesting Form" />
                                 <Button fx:id="requestedDetailsBtn" maxWidth="Infinity" onAction="#handleRequestedDetailsBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Requested Details" />
                                 <Button fx:id="trainingPerfoBtn" maxWidth="Infinity" onAction="#handleTrainingPerfoBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Training Performance" />
+                              <Button fx:id="logOutBtn" maxWidth="Infinity" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Log Out">
+                                  <VBox.margin>
+                                      <Insets top="20.0" />
+                                  </VBox.margin>
+                              </Button>
                             </children>
                             <VBox.margin>
                                 <Insets top="20.0" />
                             </VBox.margin>
                         </VBox>
-                        <Button fx:id="logOutBtn" maxWidth="Infinity" style="-fx-background-color: #4caf50; -fx-text-fill: white;" text="Log Out">
-                            <VBox.margin>
-                                <Insets top="20.0" />
-                            </VBox.margin>
-                        </Button>
                     </children>
                 </VBox>
             </left>
@@ -72,9 +62,9 @@
                                     <center>
                                         <StackPane>
                                             <children>
-                                                <AnchorPane fx:id="mainContentPane">
+                                                <AnchorPane fx:id="mainContentPane" prefHeight="648.0" prefWidth="950.0">
                                                     <children>
-                                                        <VBox spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                                        <VBox layoutY="34.0" prefHeight="542.0" prefWidth="913.0" spacing="20" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="34.0">
                                                             <children>
                                                                 <!-- Updated GridPane for Form Fields -->
                                                                 <GridPane hgap="10" vgap="10">
@@ -95,9 +85,15 @@
                                                                     </rowConstraints>
                                                                     <children>
                                                                         <Label text="IEEPF" />
-                                                                        <TextField fx:id="ieepfField" GridPane.columnIndex="1" />
-                                                                        <Label text="IEName" GridPane.rowIndex="1" />
-                                                                        <TextField fx:id="ieNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                        <TextField fx:id="ieepfField" prefHeight="24.0" prefWidth="526.0" GridPane.columnIndex="1" />
+                                                                        <Label text="IEName" GridPane.rowIndex="1">
+                                                         <GridPane.margin>
+                                                            <Insets top="10.0" />
+                                                         </GridPane.margin></Label>
+                                                                        <TextField fx:id="ieNameField" prefHeight="24.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                         <GridPane.margin>
+                                                            <Insets top="10.0" />
+                                                         </GridPane.margin></TextField>
                                                                         <Label text="IEShift" GridPane.rowIndex="2" />
                                                                         <TextField fx:id="ieShiftField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                                         <Label text="IESection" GridPane.rowIndex="3" />
@@ -116,17 +112,17 @@
                                                                 </GridPane>
 
                                                                 <!-- Updated Table -->
-                                                                <TableView fx:id="ieTable" VBox.vgrow="ALWAYS">
+                                                                <TableView fx:id="ieTable" prefHeight="312.0" prefWidth="989.0" style="-fx-background-color: rgba(255, 255, 255, 0.5); -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
                                                                     <columns>
                                                                         <TableColumn fx:id="idColumn" text="id" />
                                                                         <TableColumn fx:id="ieepfColumn" text="IEEPF" />
                                                                         <TableColumn fx:id="ieNameColumn" prefWidth="98.0" text="IEName" />
                                                                         <TableColumn fx:id="ieShiftColumn" prefWidth="93.0" text="IEShift" />
-                                                                        <TableColumn fx:id="ieSectionColumn" prefWidth="95.0" text="IESection" />
-                                                                        <TableColumn fx:id="moduleNoColumn" prefWidth="122.0" text="ModuleNo" />
-                                                                        <TableColumn fx:id="ReqOperationColumn" prefWidth="202.0" text="Operation" />
-                                                                        <TableColumn fx:id="reqDateColumn" prefWidth="126.0" text="Required Date" />
-                                                                        <TableColumn fx:id="reqCountColumn" prefWidth="93.0" text="Required Count" />
+                                                                        <TableColumn fx:id="ieSectionColumn" prefWidth="83.0" text="IESection" />
+                                                                        <TableColumn fx:id="moduleNoColumn" prefWidth="95.31561279296875" text="ModuleNo" />
+                                                                        <TableColumn fx:id="ReqOperationColumn" prefWidth="112.68438720703125" text="Operation" />
+                                                                        <TableColumn fx:id="reqDateColumn" minWidth="5.0" prefWidth="151.20281982421875" text="Required Date" />
+                                                                        <TableColumn fx:id="reqCountColumn" prefWidth="118.0" text="Required Count" />
                                                                     </columns>
                                                                 </TableView>
 
@@ -153,7 +149,7 @@
                         <AnchorPane fx:id="requestedDetailsPane" styleClass="content-pane" visible="false">
                             <children>
 
-                                <TableView fx:id="shiftTable" styleClass="custom-table" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+                                <TableView fx:id="shiftTable" prefHeight="637.0" prefWidth="910.0" styleClass="custom-table" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
                                     <columns>
                                         <TableColumn fx:id="nameColumn" prefWidth="150.0" text="Name" />
                                         <TableColumn fx:id="sectionColumn" prefWidth="150.0" text="Section" />
@@ -167,7 +163,7 @@
                         </AnchorPane>
 
                         <!-- Training Performance Pane -->
-                        <AnchorPane fx:id="trainingPerformancePane" styleClass="content-pane" visible="false">
+                        <AnchorPane fx:id="trainingPerformancePane" prefHeight="599.0" prefWidth="950.0" styleClass="content-pane" visible="false">
                             <children>
                                 <!-- Search Section -->
                                 <HBox alignment="CENTER_LEFT" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
@@ -268,11 +264,11 @@
                                 </GridPane>
 
                                 <!-- Charts Section -->
-                                <HBox spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="400.0">
+                                <HBox layoutY="281.0" prefHeight="336.0" prefWidth="910.0" spacing="20" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="281.0">
                                     <!-- Performance Tracking Chart -->
                                     <VBox spacing="10" HBox.hgrow="ALWAYS">
                                         <Label styleClass="section-header" text="Performance Tracking" />
-                                        <BarChart fx:id="performanceChart">
+                                        <BarChart fx:id="performanceChart" prefHeight="303.0" prefWidth="405.0">
                                             <xAxis>
                                                 <CategoryAxis label="Operations" />
                                             </xAxis>
@@ -283,10 +279,10 @@
                                     </VBox>
 
                                     <!-- Daily Tracking Charts -->
-                                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                                    <VBox prefHeight="250.0" prefWidth="486.0" spacing="10" HBox.hgrow="ALWAYS">
                                         <Label styleClass="section-header" text="Daily Tracking" />
-                                        <GridPane vgap="10">
-                                            <BarChart fx:id="performanceDailyChart" prefHeight="200" title="Performance" GridPane.rowIndex="0">
+                                        <GridPane prefHeight="358.0" prefWidth="486.0" vgap="10">
+                                            <BarChart fx:id="performanceDailyChart" prefHeight="209.0" prefWidth="493.0" title="Performance" GridPane.rowIndex="0">
                                                 <xAxis>
                                                     <CategoryAxis />
                                                 </xAxis>
@@ -297,7 +293,7 @@
 
                                             <BarChart fx:id="qualityChart" prefHeight="200" title="Quality" GridPane.rowIndex="1">
                                                 <xAxis>
-                                                    <CategoryAxis />
+                                                    <CategoryAxis prefWidth="375.0" />
                                                 </xAxis>
                                                 <yAxis>
                                                     <NumberAxis />
