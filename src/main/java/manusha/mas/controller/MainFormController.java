@@ -146,7 +146,6 @@ public class MainFormController {
 
         stage.setScene(scene);
         stage.setTitle(role + " Dashboard");
-        stage.setResizable(false); // Prevent resizing
         stage.show();
 
         // Close the current login window
