@@ -38,7 +38,7 @@
                         <Button fx:id="requirementFormBtn" maxWidth="Infinity" onAction="#requirementFormBtn" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-alignment: CENTER_LEFT;" text="Requirement Form" />
                         <VBox prefHeight="648.0" prefWidth="233.0" VBox.vgrow="ALWAYS">
                      <children>
-                              <Button fx:id="logOutBtn" onAction="#handleLogout" maxWidth="Infinity" prefHeight="32.0" prefWidth="250.0" text="Log Out">
+                              <Button fx:id="logOutBtn" maxWidth="Infinity" onAction="#handleLogout" prefHeight="32.0" prefWidth="250.0" text="Log Out">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin></Button>
@@ -242,14 +242,14 @@
                                             <TextField fx:id="req_section" promptText="Section" />
                                             <DatePicker fx:id="req_date" promptText="Select Date" />
 
-                                            <Button onAction="#handleSubmitRequirement" text="Submit" />
+                                            <Button fx:id="submitBtnReq" onAction="#handleSubmitRequirement" text="Submit" />
                                         </VBox>
 
                                         <!-- Center Operations Section -->
                                         <GridPane hgap="20" prefHeight="269.0" prefWidth="547.0" vgap="20">
                                             <!-- Operation 1 -->
                                             <VBox prefHeight="107.0" prefWidth="211.0" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                                                <Button text="Operation 1" fx:id="operationBtn"/>
+                                                <Button fx:id="operationBtn" text="Operation 1" />
                                                 <Label fx:id="topPerformer1Op1" text="Name 1" />
                                                 <Label fx:id="topPerformer2Op1" text="Name 2" />
                                                 <Label fx:id="topPerformer3Op1" text="Name 3" />
@@ -257,7 +257,7 @@
 
                                             <!-- Operation 2 -->
                                             <VBox prefHeight="107.0" prefWidth="299.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                                                <Button text="Operation 2" fx:id="operationBtn2" />
+                                                <Button fx:id="operationBtn2" text="Operation 2" />
                                                 <Label fx:id="topPerformer1Op2" text="Name 1" />
                                                 <Label fx:id="topPerformer2Op2" text="Name 2" />
                                                 <Label fx:id="topPerformer3Op2" text="Name 3" />
@@ -265,7 +265,7 @@
 
                                             <!-- Operation 3 -->
                                             <VBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                                                <Button text="Operation 3" fx:id="operationBtn3" />
+                                                <Button fx:id="operationBtn3" text="Operation 3" />
                                                 <Label fx:id="topPerformer1Op3" text="Name 1" />
                                                 <Label fx:id="topPerformer2Op3" text="Name 2" />
                                                 <Label fx:id="topPerformer3Op3" text="Name 3" />
@@ -273,7 +273,7 @@
 
                                             <!-- Operation 4 -->
                                             <VBox prefHeight="110.0" prefWidth="179.0" spacing="10" GridPane.rowIndex="1">
-                                                <Button text="Operation 4" fx:id="operationBtn4" />
+                                                <Button fx:id="operationBtn4" text="Operation 4" />
                                                 <Label fx:id="topPerformer1Op4" text="Name 1" />
                                                 <Label fx:id="topPerformer2Op4" text="Name 2" />
                                                 <Label fx:id="topPerformer3Op4" text="Name 3" />
@@ -281,7 +281,7 @@
 
                                             <!-- Operation 5 -->
                                             <VBox prefHeight="110.0" prefWidth="168.0" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                <Button text="Operation 5" fx:id="operationBtn5" />
+                                                <Button fx:id="operationBtn5" text="Operation 5" />
                                                 <Label fx:id="topPerformer1Op5" text="Name 1" />
                                                 <Label fx:id="topPerformer2Op5" text="Name 2" />
                                                 <Label fx:id="topPerformer3Op5" text="Name 3" />
@@ -289,7 +289,7 @@
 
                                             <!-- Operation 6 -->
                                             <VBox spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                                                <Button text="Operation 6" fx:id="operationBtn6" />
+                                                <Button fx:id="operationBtn6" text="Operation 6" />
                                                 <Label fx:id="topPerformer1Op6" text="Name 1" />
                                                 <Label fx:id="topPerformer2Op6" text="Name 2" />
                                                 <Label fx:id="topPerformer3Op6" text="Name 3" />

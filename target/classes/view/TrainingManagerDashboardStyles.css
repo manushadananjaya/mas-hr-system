@@ -299,6 +299,15 @@
     -fx-background-color: darkblue;
 }
 
+#submitBtnReq {
+    -fx-background-color: blue;
+
+}
+
+#submitBtnReq:hover {
+    -fx-background-color: darkblue;
+}
+
 
 
 

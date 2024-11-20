@@ -20,6 +20,16 @@
     -fx-text-fill: black; /* Ensure text inside fields is readable */
 }
 
+#txtuname {
+    -fx-background-color: rgba(255, 255, 255, 255);
+}
+
+#txtpword {
+    -fx-background-color: rgba(255, 255, 255, 255);
+
+
+}
+
 #btnsignin {
     -fx-background-color: green;
     -fx-text-fill: white;
@@ -31,5 +41,15 @@
 
 #btnsignin:hover {
     -fx-background-color: darkgreen;
+}
+
+.black-prompt .text-field:focused .prompt-text,
+.black-prompt .text-field .prompt-text {
+    -fx-text-fill: black;
+}
+
+.black-prompt .password-field:focused .prompt-text,
+.black-prompt .password-field .prompt-text {
+   -fx-text-fill: black;
 }
 
