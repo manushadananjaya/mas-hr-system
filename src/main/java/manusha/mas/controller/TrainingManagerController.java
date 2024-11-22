@@ -201,7 +201,7 @@ public class TrainingManagerController {
 
         // Load submitted requirements into the table
         loadSubmittedRequirements();
-        updateTopPerformers(); // Load top performers
+        loadAndDisplayTopPerformers();
 
         req_operation.getItems().addAll(
                 "Operation 1",
@@ -483,7 +483,6 @@ public class TrainingManagerController {
             return;
         }
 
-
         // Convert LocalDate to SQL Date
         Date sqlDate = Date.valueOf(date);
 
@@ -504,16 +503,13 @@ public class TrainingManagerController {
                 showSuccess("Requirement submitted successfully!");
                 clearRequirementForm();
                 loadSubmittedRequirements();
+                filterTopPerformers(operation, name); // Update the top performers dynamically
             } else {
                 showError("Failed to submit the requirement.");
             }
         } catch (Exception e) {
             showError("Error submitting requirement: " + e.getMessage());
         }
-    }
-    private void showSuccess(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
-        alert.show();
     }
 
     private void clearRequirementForm() {
@@ -549,85 +545,96 @@ public class TrainingManagerController {
         }
     }
 
-    //top operartion performers update
-
-    private void updateTopPerformers() {
+    private void filterTopPerformers(String operation, String excludedName) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            // Map to hold top performers for each operation
-            Map<String, List<String>> topPerformersMap = new HashMap<>();
+            String operationColumn = getOperationColumn(operation);
 
-            // Query for each operation
-            for (int i = 1; i <= 6; i++) {
-                String operationColumn = "operation" + i;
+            if (operationColumn != null) {
+                // Fetch current top performers for the operation
                 String query = "SELECT name, " + operationColumn + " AS score " +
                         "FROM employee_performance " +
                         "WHERE " + operationColumn + " IS NOT NULL " +
                         "ORDER BY score DESC " +
                         "LIMIT 3";
 
+                List<String> filteredPerformers = new ArrayList<>();
                 try (PreparedStatement statement = connection.prepareStatement(query);
                      ResultSet resultSet = statement.executeQuery()) {
 
-                    List<String> topPerformers = new ArrayList<>();
                     while (resultSet.next()) {
-                        topPerformers.add(resultSet.getString("name"));
+                        String performerName = resultSet.getString("name");
+
+                        // Exclude the submitted name from the top performers
+                        if (!performerName.equalsIgnoreCase(excludedName)) {
+                            filteredPerformers.add(performerName);
+                        }
                     }
-
-                    // Store the results in the map
-                    topPerformersMap.put(operationColumn, topPerformers);
                 }
+
+                // Update the UI with the filtered list of top performers
+                updateLabelsForOperation(operation, filteredPerformers,
+                        getLabelForOperation(operation, 1),
+                        getLabelForOperation(operation, 2),
+                        getLabelForOperation(operation, 3));
             }
-
-            // Update the labels with the fetched names
-            setTopPerformersLabels(topPerformersMap);
-
         } catch (Exception e) {
             showError("Error updating top performers: " + e.getMessage());
         }
     }
 
-    private void setTopPerformersLabels(Map<String, List<String>> topPerformersMap) {
-        // Update labels for Operation 1
-        updateLabelsForOperation("Operation 1", topPerformersMap.getOrDefault("operation1", Collections.emptyList()),
-                topPerformer1Op1, topPerformer2Op1, topPerformer3Op1);
-
-        // Update labels for Operation 2
-        updateLabelsForOperation("Operation 2", topPerformersMap.getOrDefault("operation2", Collections.emptyList()),
-                topPerformer1Op2, topPerformer2Op2, topPerformer3Op2);
-
-        // Continue for all operations...
-        updateLabelsForOperation("Operation 3", topPerformersMap.getOrDefault("operation3", Collections.emptyList()),
-                topPerformer1Op3, topPerformer2Op3, topPerformer3Op3);
-
-        updateLabelsForOperation("Operation 4", topPerformersMap.getOrDefault("operation4", Collections.emptyList()),
-                topPerformer1Op4, topPerformer2Op4, topPerformer3Op4);
-
-        updateLabelsForOperation("Operation 5", topPerformersMap.getOrDefault("operation5", Collections.emptyList()),
-                topPerformer1Op5, topPerformer2Op5, topPerformer3Op5);
-
-        updateLabelsForOperation("Operation 6", topPerformersMap.getOrDefault("operation6", Collections.emptyList()),
-                topPerformer1Op6, topPerformer2Op6, topPerformer3Op6);
-    }
-
     private void updateLabelsForOperation(String operation, List<String> topPerformers,
                                           Label label1, Label label2, Label label3) {
-        if (topPerformers.size() > 0) {
-            label1.setText(topPerformers.get(0));
-        } else {
-            label1.setText("No Data");
-        }
+        label1.setText(topPerformers.size() > 0 ? topPerformers.get(0) : "No Data");
+        label2.setText(topPerformers.size() > 1 ? topPerformers.get(1) : "No Data");
+        label3.setText(topPerformers.size() > 2 ? topPerformers.get(2) : "No Data");
+    }
 
-        if (topPerformers.size() > 1) {
-            label2.setText(topPerformers.get(1));
-        } else {
-            label2.setText("No Data");
+    private String getOperationColumn(String operation) {
+        switch (operation) {
+            case "Operation 1": return "operation1";
+            case "Operation 2": return "operation2";
+            case "Operation 3": return "operation3";
+            case "Operation 4": return "operation4";
+            case "Operation 5": return "operation5";
+            case "Operation 6": return "operation6";
+            default: return null;
         }
+    }
 
-        if (topPerformers.size() > 2) {
-            label3.setText(topPerformers.get(2));
-        } else {
-            label3.setText("No Data");
+    private Label getLabelForOperation(String operation, int rank) {
+        switch (operation) {
+            case "Operation 1":
+                return rank == 1 ? topPerformer1Op1 : rank == 2 ? topPerformer2Op1 : topPerformer3Op1;
+            case "Operation 2":
+                return rank == 1 ? topPerformer1Op2 : rank == 2 ? topPerformer2Op2 : topPerformer3Op2;
+            case "Operation 3":
+                return rank == 1 ? topPerformer1Op3 : rank == 2 ? topPerformer2Op3 : topPerformer3Op3;
+            case "Operation 4":
+                return rank == 1 ? topPerformer1Op4 : rank == 2 ? topPerformer2Op4 : topPerformer3Op4;
+            case "Operation 5":
+                return rank == 1 ? topPerformer1Op5 : rank == 2 ? topPerformer2Op5 : topPerformer3Op5;
+            case "Operation 6":
+                return rank == 1 ? topPerformer1Op6 : rank == 2 ? topPerformer2Op6 : topPerformer3Op6;
+            default:
+                return null;
         }
+    }
+
+    private void loadAndDisplayTopPerformers() {
+        // Fetch top performers for each operation
+        filterTopPerformers("Operation 1", "");
+        filterTopPerformers("Operation 2", "");
+        filterTopPerformers("Operation 3", "");
+        filterTopPerformers("Operation 4", "");
+        filterTopPerformers("Operation 5", "");
+        filterTopPerformers("Operation 6", "");
+    }
+
+
+
+    private void showSuccess(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, message);
+        alert.show();
     }
 
     @FXML
