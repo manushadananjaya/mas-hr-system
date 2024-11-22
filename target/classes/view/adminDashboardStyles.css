@@ -239,6 +239,21 @@
 fx-background-color: darkgreen;
 }
 
+#editButton {
+    -fx-background-color: forestgreen;
+}
+
+#editButton:hover {
+    -fx-background-color: darkgreen;
+}
+
+#logoutBtn {
+    -fx-background-color: forestgreen;
+}
+
+#logoutBtn:hover {
+    -fx-background-color: darkgreen;
+}
 
 #genderComboBox{
     -fx-text-fill: white;

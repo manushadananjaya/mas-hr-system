@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="adminDashboardPane" prefHeight="1004.0" prefWidth="1221.0" stylesheets="@adminDashboardStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manusha.mas.controller.AdminDashboardController">
+<AnchorPane fx:id="adminDashboardPane" prefHeight="922.0" prefWidth="1170.0" stylesheets="@adminDashboardStyles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manusha.mas.controller.AdminDashboardController">
     <children>
 
         <!-- Personal Details Section -->
@@ -113,9 +113,11 @@
         </VBox>
 
         <!-- Save and Delete Buttons -->
-        <HBox fx:id="actionButtons" spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+        <HBox fx:id="actionButtons" prefHeight="36.0" prefWidth="1128.0" spacing="20" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
             <Button fx:id="saveButton" onAction="#handleSave" text="Save" />
+         <Button fx:id="editButton" onAction="#handleEdit" text="Edit" />
             <Button fx:id="deleteButton" onAction="#handleDelete" text="Delete" />
+         <Button fx:id="logoutBtn" onAction="#handleLogout" text="Logout" />
         </HBox>
 
         <!-- Table -->

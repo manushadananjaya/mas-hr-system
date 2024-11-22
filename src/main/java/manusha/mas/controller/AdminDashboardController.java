@@ -4,12 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import manusha.mas.model.Employee;
 import manusha.mas.util.DatabaseConnection;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class AdminDashboardController {
@@ -190,6 +196,86 @@ public class AdminDashboardController {
         }
     }
 
+    @FXML
+    private void handleEdit(ActionEvent event) {
+        // Get the selected employee
+        Employee selectedEmployee = adminTable.getSelectionModel().getSelectedItem();
+
+        if (selectedEmployee != null) {
+            // Populate fields with the selected employee's data
+            fullNameField.setText(selectedEmployee.getFullName());
+            epfNumberField.setText(selectedEmployee.getEpfNumber());
+            nationalIdField.setText(selectedEmployee.getNationalId());
+            sectionField.setText(selectedEmployee.getSection());
+            lineNumberField.setText(selectedEmployee.getLineNumber());
+            designationField.setText(selectedEmployee.getDesignation());
+            addressField.setText(selectedEmployee.getAddress());
+            dobPicker.setValue(selectedEmployee.getDob());
+            genderComboBox.setValue(selectedEmployee.getGender());
+            maritalStatusComboBox.setValue(selectedEmployee.getMaritalStatus());
+            educationLevelField.setText(selectedEmployee.getEducationLevel());
+            pastExperienceField.setText(selectedEmployee.getPastExperience());
+
+            // Save updated details when the save button is clicked
+            saveButton.setOnAction(e -> {
+                // Validate fields
+                if (fullNameField.getText().isEmpty() || epfNumberField.getText().isEmpty() ||
+                        nationalIdField.getText().isEmpty() || sectionField.getText().isEmpty() ||
+                        lineNumberField.getText().isEmpty() || designationField.getText().isEmpty() ||
+                        addressField.getText().isEmpty() || dobPicker.getValue() == null ||
+                        genderComboBox.getValue() == null || maritalStatusComboBox.getValue() == null ||
+                        educationLevelField.getText().isEmpty() || pastExperienceField.getText().isEmpty()) {
+
+                    showAlert(Alert.AlertType.WARNING, "Validation Error", "Please fill in all fields.");
+                    return;
+                }
+
+                try (Connection conn = DatabaseConnection.getConnection()) {
+                    String sql = "UPDATE employees SET full_name = ?, national_id = ?, section = ?, line_number = ?, designation = ?, address = ?, dob = ?, gender = ?, marital_status = ?, education_level = ?, past_experience = ? WHERE epf_number = ?";
+                    PreparedStatement stmt = conn.prepareStatement(sql);
+                    stmt.setString(1, fullNameField.getText());
+                    stmt.setString(2, nationalIdField.getText());
+                    stmt.setString(3, sectionField.getText());
+                    stmt.setString(4, lineNumberField.getText());
+                    stmt.setString(5, designationField.getText());
+                    stmt.setString(6, addressField.getText());
+                    stmt.setDate(7, Date.valueOf(dobPicker.getValue()));
+                    stmt.setString(8, genderComboBox.getValue());
+                    stmt.setString(9, maritalStatusComboBox.getValue());
+                    stmt.setString(10, educationLevelField.getText());
+                    stmt.setString(11, pastExperienceField.getText());
+                    stmt.setString(12, epfNumberField.getText()); // Match on EPF number
+
+                    int rowsUpdated = stmt.executeUpdate();
+                    if (rowsUpdated > 0) {
+                        // Update the table
+                        selectedEmployee.setFullName(fullNameField.getText());
+                        selectedEmployee.setNationalId(nationalIdField.getText());
+                        selectedEmployee.setSection(sectionField.getText());
+                        selectedEmployee.setLineNumber(lineNumberField.getText());
+                        selectedEmployee.setDesignation(designationField.getText());
+                        selectedEmployee.setAddress(addressField.getText());
+                        selectedEmployee.setDob(dobPicker.getValue());
+                        selectedEmployee.setGender(genderComboBox.getValue());
+                        selectedEmployee.setMaritalStatus(maritalStatusComboBox.getValue());
+                        selectedEmployee.setEducationLevel(educationLevelField.getText());
+                        selectedEmployee.setPastExperience(pastExperienceField.getText());
+
+                        adminTable.refresh(); // Refresh the table view
+                        clearFields();
+                        showAlert(Alert.AlertType.INFORMATION, "Success", "Employee details updated successfully.");
+                    }
+
+                } catch (SQLException ex) {
+                    showAlert(Alert.AlertType.ERROR, "Database Error", "Failed to update employee: " + ex.getMessage());
+                    ex.printStackTrace();
+                }
+            });
+        } else {
+            showAlert(Alert.AlertType.WARNING, "No Selection", "Please select an employee to edit.");
+        }
+    }
+
     private void loadEmployeesFromDatabase() {
         try (Connection conn = DatabaseConnection.getConnection()) {
             String sql = "SELECT * FROM employees";
@@ -219,6 +305,23 @@ public class AdminDashboardController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/mainForm.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("MAS Intimates");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     private void clearFields() {
         fullNameField.clear();
